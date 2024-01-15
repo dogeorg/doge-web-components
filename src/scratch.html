@@ -1,0 +1,52 @@
+<!doctype html>
+<html class="sl-theme-light">
+	<head>
+		<title id="title">Dev stuff</title>
+		<style>
+			/* for convenience */
+			body {
+				padding: 0px;
+				margin: 0px;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			.page {
+				margin:80px auto;
+				max-width: 600px;
+			}
+		</style>
+	</head>
+	<body>			
+		<doge-nav>
+			<doge-site-picker slot="brand"></doge-site-picker>
+			<a href="#home" active>So Home</a>
+			<a href="#what">What is Dogecoin</a>
+			<a href="#wallets">Much Wallets</a>
+			<a href="#community">Very Community</a>
+			<doge-nav-list>
+				<a href="#dopedia" slot="selected">So Dogepedia <small>▼</small></a>
+				<a href="#doco">Documentation</a>
+				<a href="#faq">FAQ</a>
+				<a href="#how">How Tos</a>
+				<a href="#resource">Resources</a>
+			</doge-nav-list>
+			<doge-nav-list>
+				<a href="#dopedia" slot="selected">More Doge <small>▼</small></a>
+				<a href="#doco">Extra</a>
+				<a href="#doco">and Mooaar!</a>
+			</doge-nav-list>
+		</doge-nav>
+		<div class="page">
+			<h1>Doge Component Playground</h1>
+			<hr />
+
+			<script type="module" src="/src/components/navigation/doge-nav.js"></script>
+			<script type="module" src="/src/components/doge-price.js"></script>
+			<!-- <doge-price currency="usd"></doge-price> -->
+
+			<script type="module" src="/src/components/doge-qr.js"></script>
+			<doge-qr address="peanut butter jelly time"></doge-qr>
+
+		</div>
+
+	</body>
+</html>
