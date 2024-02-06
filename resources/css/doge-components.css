@@ -1,0 +1,12 @@
+/*@import "../blocks/shoelace@2.12.0/light.css";*/
+/*@import "../blocks/shoelace@2.12.0/dark.css";*/
+@import "../fonts/doge-font-set.css";
+
+:root {
+	--doge-yellow: #ffc107;
+	--doge-pink: #ff27a1;
+	--doge-purple: #834aff;
+	--doge-black: black;
+	--doge-font: "Comic Sans MS", "Comic Sans", cursive;
+	--doge-font-fancy: "Comic Neue", "Comic Sans MS", "Comic Sans", cursive;
+}
