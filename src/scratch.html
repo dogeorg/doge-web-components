@@ -30,16 +30,34 @@
 				<a href="#resource">Resources</a>
 			</doge-nav-list>
 			<doge-nav-list>
-				<a href="#dopedia" slot="selected">More Doge <small>▼</small></a>
+				<a href="#dopedia" slot="selected">News <small>▼</small></a>
 				<a href="#doco">Extra</a>
 				<a href="#doco">and Mooaar!</a>
 			</doge-nav-list>
+			<doge-nav-mobile slot="mobile">
+				<a href="#home" active>So Home</a>
+				<a href="#what">What is Dogecoin</a>
+				<a href="#wallets">Much Wallets</a>
+				<a href="#community">Very Community</a>
+				
+				<span>So Dogepedia</span>
+				<a href="#doc">Documentation</a>
+				<a href="#faq">FAQ</a>
+				<a href="#how">How Tos</a>
+				<a href="#rsc">Resources</a>
+				
+				<span>More Doge</span>
+				<a href="#dopedia">Extra</a>
+				<a href="#dopedia">And Mooar!</a>
+			</doge-nav-mobile>
+			</div>
 		</doge-nav>
 		<div class="page">
 			<h1>Doge Component Playground</h1>
 			<hr />
 
 			<script type="module" src="/src/components/navigation/doge-nav.js"></script>
+			<script type="module" src="/src/components/navigation/doge-nav-mobile.js"></script>
 			<script type="module" src="/src/components/doge-price.js"></script>
 			<!-- <doge-price currency="usd"></doge-price> -->
 
