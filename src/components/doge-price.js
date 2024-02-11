@@ -13,7 +13,7 @@ export class DogePrice extends LitElement {
   constructor() {
     super();
     this.interval = 300000; // Default interval is 5 minutes
-    this.currency = 'USD'; // Default currency is USD
+    this.currency = 'usd'; // Default currency is USD
     this.price = 0; // Initialize the price property
   }
 
@@ -36,7 +36,7 @@ export class DogePrice extends LitElement {
 
   render() {
     return html`
-      <div>Current Dogecoin Price: ${this.price} ${this.currency.toUpperCase()}</div>
+      <span>${this.price} ${this.currency.toUpperCase()}</span>
     `;
   }
 }

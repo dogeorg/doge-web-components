@@ -18,12 +18,14 @@ Within your HTML file, add a doge component and start using it.
 <doge-qr address="D89DhnsgKncmN12RejxudfU8AwXp3946q1" caption="Treat me a coffee?"></doge-qr>
 ```
 
+---
+
 ### 2. Fetch Lib (Coming Soon)
 
-Within your HTML file, add fetch.js, configure and utilise.
+Within your HTML file, add configure.js, configure and utilise.
 
 ```
-<script type="text/javascript" src="https://fetch.dogecoin.org/components.js"></script>
+<script type="text/javascript" src="https://fetch.dogecoin.org/lib/configure.js"></script>
 ```
 
 ```

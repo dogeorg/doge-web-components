@@ -1,6 +1,6 @@
 // import { setBasePath } from '../../resources/blocks/shoelace@2.12.0/utilities/base-path.js';
 
-export const resourceBasePath = "https://fetch.dogecoin.local/resources"
+export const resourceBasePath = "https://fetch.dogecoin.org/resources"
 
 export function dogeComponentInit() {
 	// Ensures the page utilising the component has the base doge components stylesheet

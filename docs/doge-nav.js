@@ -1,6 +1,6 @@
 // import { setBasePath } from '../../resources/blocks/shoelace@2.12.0/utilities/base-path.js';
 
-const resourceBasePath = "https://fetch.dogecoin.local/resources";
+const resourceBasePath = "https://fetch.dogecoin.org/resources";
 
 function dogeComponentInit() {
 	// Ensures the page utilising the component has the base doge components stylesheet
@@ -80,178 +80,178 @@ class extends Vt{constructor(t){if(super(t),1!==t.type||"class"!==t.name||t.stri
 window.litDisableBundleWarning||console.warn("Lit has been loaded from a bundle that combines all core features into a single file. To reduce transfer size and parsing cost, consider using the `lit` npm package directly in your project.");
 
 class DogeNav extends ut {
-	static styles = o`
-		:host {
-			width: 100%;
-			display: block;
-			position: fixed;
+  static styles = o`
+    :host {
+      width: 100%;
+      display: block;
+      position: fixed;
       top: 0px;
       z-index: 999;
 
-			/* make themeable */
-			background: var(--doge-black);
-			font-size: 1.1rem;
-		}
-		header {
-			margin: 0px auto;
-			display: flex;
-			max-height: 100px;
-			width: 100%;
-			max-width: 1440px;
+      /* make themeable */
+      background: var(--doge-black);
+      font-size: 1.1rem;
+    }
+    header {
+      margin: 0px auto;
+      display: flex;
+      max-height: 100px;
+      width: 100%;
+      max-width: 1440px;
       align-items: center;
-			justify-content: space-between;
+      justify-content: space-between;
 
-			color: #a9a9b3;
-		}
+      color: #a9a9b3;
+    }
 
-		header .logo {
-			display: inline-block;
-			padding: 7px;
-		}
+    header .logo {
+      display: inline-block;
+      padding: 7px;
+    }
 
-		header div {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			padding: 0 1rem;
-			z-index: 99;
-		}
+    header div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      z-index: 99;
+    }
 
-		header nav {
+    header nav {
       display: none;
       @media only screen and (min-width: 980px) {
         display: flex;
       }
-			flex-direction: row;
+      flex-direction: row;
       align-items: center;
-			justify-content: flex-end;
-			padding: 0 15px;
+      justify-content: flex-end;
+      padding: 0 15px;
 
-			/* TODO: theme */
-			font-family: var(--doge-font-fancy);
-		}
+      /* TODO: theme */
+      font-family: var(--doge-font-fancy);
+    }
 
-		::slotted(a),
-		::slotted(a:visited) {
-			color: #a9a9b3;
-			text-decoration: none;
+    ::slotted(a),
+    ::slotted(a:visited) {
+      color: #a9a9b3;
+      text-decoration: none;
       white-space: nowrap;
-		}
+    }
 
-		::slotted(a) {
-			display: inline-block;
-			margin: 0 9px;
-		}
+    ::slotted(a) {
+      display: inline-block;
+      margin: 0 9px;
+    }
 
-		::slotted(a:hover) {
-			color: #ffffff;
-			text-decoration: underline;
-		}
+    ::slotted(a:hover) {
+      color: #ffffff;
+      text-decoration: underline;
+    }
 
-		::slotted(a[active]) {
-			color: var(--doge-yellow);
-			text-decoration: underline;
-		}
+    ::slotted(a[active]) {
+      color: var(--doge-yellow);
+      text-decoration: underline;
+    }
 
     ::slotted(div) {
       margin: 1px 9px 0px 9px;
     }
-	`;
+  `;
 
-	constructor() {
-		super();
-	}
+  constructor() {
+    super();
+  }
 
-	connectedCallback() {
-		super.connectedCallback();
-   	dogeComponentInit();
+  connectedCallback() {
+    super.connectedCallback();
+    dogeComponentInit();
    }
 
-	render() {
-		return Z`
-			<header>
-				<div>
-					<slot name="brand" class="logo"></slot>
-				</div>
-				<nav>
-					<slot></slot>
-				</nav>
+  render() {
+    return Z`
+      <header>
+        <div>
+          <slot name="brand" class="logo"></slot>
+        </div>
+        <nav>
+          <slot></slot>
+        </nav>
         <slot name="mobile"></slot>
-			</header>
-		`;
-	}
+      </header>
+    `;
+  }
 }
 customElements.define("doge-nav", DogeNav);
 
 class DogeNavList extends ut {
-	static styles = o`
-		.wrapper {
-			position: relative;
-			overflow: visible;
-			padding: 0px 9px;
-		}
+  static styles = o`
+    .wrapper {
+      position: relative;
+      overflow: visible;
+      padding: 0px 9px;
+    }
 
-		.inner {
-			position: absolute;
-			background: var(--doge-black);
-			display: none;
-			right: 0px;
+    .inner {
+      position: absolute;
+      background: var(--doge-black);
+      display: none;
+      right: 0px;
       text-align: right;
-			padding-top: 18px;
-			padding-bottom: 9px;
-		}
+      padding-top: 18px;
+      padding-bottom: 9px;
+    }
 
-		::slotted(a),
-		::slotted(a:visited) {
-			color: #a9a9b3;
-			text-decoration: none;
-		}
+    ::slotted(a),
+    ::slotted(a:visited) {
+      color: #a9a9b3;
+      text-decoration: none;
+    }
 
-		::slotted(a:first-child) {
-			padding: 0px;
-		}
+    ::slotted(a:first-child) {
+      padding: 0px;
+    }
 
-		::slotted(a) {
-			padding: 4.5px 18px;
-			white-space: nowrap;
-			display: block;
-		}
+    ::slotted(a) {
+      padding: 4.5px 18px;
+      white-space: nowrap;
+      display: block;
+    }
 
-		::slotted(a[active]) {
-			display: block;
-		}
+    ::slotted(a[active]) {
+      display: block;
+    }
 
-		::slotted(a:hover) {
-			color: white;
-			text-decoration: underline;
-		}
+    ::slotted(a:hover) {
+      color: white;
+      text-decoration: underline;
+    }
 
-		.wrapper:hover .inner {
-			display: block;
-		}
+    .wrapper:hover .inner {
+      display: block;
+    }
 
-		.arrow {
-			font-size: 1.1rem;
-			position: absolute;
-			top: 18px;
-			right: -5px;
-		}
-	`;
+    .arrow {
+      font-size: 1.1rem;
+      position: absolute;
+      top: 18px;
+      right: -5px;
+    }
+  `;
 
-	constructor() {
-		super();
-	}
+  constructor() {
+    super();
+  }
 
-	render() {
-		return Z`
-			<div class="wrapper">
-				<slot name="selected"></slot>
-				<div class="inner">
-					<slot></slot>
-				</div>
-			</div>
-		`;
-	}
+  render() {
+    return Z`
+      <div class="wrapper">
+        <slot name="selected"></slot>
+        <div class="inner">
+          <slot></slot>
+        </div>
+      </div>
+    `;
+  }
 }
 
 customElements.define("doge-nav-list", DogeNavList);
@@ -294,7 +294,7 @@ class DogeSitePicker extends ut {
   constructor() {
     super();
     // Declare reactive properties and set defaults.
-    this.selected = "dogecoin";
+    this.selected = "foundation";
     this.spa;
   }
 
@@ -327,10 +327,9 @@ class DogeSitePicker extends ut {
   render() {
     return Z`
       <div class="wrapper" ${this.spa}>
-        <a href="${this._getURL()}" class="selected-item-wrap">
+        <a href="https://dogecoin.org" class="selected-item-wrap">
           <img
-            src="${resourceBasePath}/img/logos/text/logo-text-${this
-              .selected}.png"
+            src="https://fetch.dogecoin.org/resources/img/logos/text/logo-text-foundation.png"
             alt="${this.selected} logo ${this.spa}"
           />
         </a>
@@ -444,7 +443,7 @@ class DogeSitePickerItem extends ut {
       case "dogecoin":
         return "The Fun and Friendly Internet Currency Pioneering the Way for Community-Driven Crypto!";
       case "developers":
-        return "Unleashing Creativity, One Shibe at a Time: The Official Hub for Dogecoin Developers.";
+        return "Unleashing Creativity, One Shibe at a Time: The hub for Dogecoin Developers.";
       case "community":
         return "Join the Pack: Dogecoin's Thriving Community - Where Camaraderie, Cryptocurrency and Memes Collide!";
     }

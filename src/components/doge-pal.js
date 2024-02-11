@@ -13,8 +13,8 @@ export class DogePal extends LitElement {
 	constructor() {
 		super();
 		this.imageUrl = undefined;
-		this.max_width = 600;
-		this.max_height = 600;
+		this.max_width = "100%";
+		this.max_height = "600px";
 	}
 
 	connectedCallback() {
@@ -37,7 +37,7 @@ export class DogePal extends LitElement {
 
 	render() {
 		return html`
-			<img src="${this.imageUrl}" style="max-width: ${this.max_width}px"; max-height: ${this.max_height}px" />
+			<img src="${this.imageUrl}" style="max-width: ${this.max_width}"; max-height: ${this.max_height}" />
 		`;
 	}
 }
