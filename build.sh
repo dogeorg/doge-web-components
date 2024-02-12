@@ -24,3 +24,7 @@ cp src/index.html dist/index.html
 cp -R src/lib dist/lib
 cp -R resources dist/
 cp -R example dist/
+
+# Write some version data
+echo "Commit:$(git log -1 --pretty=format:%h)" >> dist/version.txt
+echo "UTC:$(date -u)" >> dist/version.txt
