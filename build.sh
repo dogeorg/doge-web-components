@@ -2,7 +2,7 @@
 
 # Clear up
 rm -rf dist
-mkdir -p dist/lib
+mkdir -p dist
 
 # Find all JavaScript files within src/components directory
 JS_FILES=$(find src/components -type f -name "*.js")
