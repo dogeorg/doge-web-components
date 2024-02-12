@@ -1,11 +1,8 @@
 #!/bin/bash
 
-# requires rollup@4.9.5
-# npm install -g rollup@5.9.5
-
 # Clear up
-rm -rf docs
-mkdir -p docs/lib
+rm -rf dist
+mkdir -p dist/lib
 
 # Find all JavaScript files within src/components directory
 JS_FILES=$(find src/components -type f -name "*.js")
@@ -15,15 +12,15 @@ for file in $JS_FILES
 do
    filename=$(basename "$file")
    echo "File: $filename"
-   cp "$file" "docs/$filename"
+   cp "$file" "dist/$filename"
 done
 
 # Write CNAME file
-echo "fetch.dogecoin.org" > docs/CNAME
+echo "fetch.dogecoin.org" > dist/CNAME
 echo "fetch.dogecoin.org" > CNAME
 
 # Copy the static files to the dist directory.
-cp src/index.html docs/index.html
-cp -R src/lib/ docs/lib
-cp -R resources docs/
-cp -R example docs/
+cp src/index.html dist/index.html
+cp -R src/lib/ dist/lib
+cp -R resources dist/
+cp -R example dist/
