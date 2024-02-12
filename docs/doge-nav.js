@@ -259,10 +259,15 @@ customElements.define("doge-nav-list", DogeNavList);
 class DogeSitePicker extends ut {
   static properties = {
     selected: { attribute: true, reflect: true },
+    active: { attribute: true, reflect: true },
     spa: {},
   };
   // Define scoped styles right with your component, in plain CSS
   static styles = o`
+    :host([active="true"]) .dropdown-content {
+      display: block;
+    }
+
     .wrapper {
       position: relative;
       display: inline-block;
@@ -271,8 +276,10 @@ class DogeSitePicker extends ut {
 
     .wrapper:hover .dropdown-content {
       display: block;
-      font-size: 1.1rem;
-      line-height: 1.3;
+    }
+
+    .dropdown-content.active {
+      display: block;
     }
 
     .selected-item-wrap img {
@@ -288,13 +295,15 @@ class DogeSitePicker extends ut {
       z-index: 9999;
       overflow: hidden;
       width: 285px;
+      font-size: 1.1rem;
+      line-height: 1.3;
     }
   `;
 
   constructor() {
     super();
-    // Declare reactive properties and set defaults.
     this.selected = "foundation";
+    this.active = false;
     this.spa;
   }
 
@@ -316,24 +325,28 @@ class DogeSitePicker extends ut {
     }
   }
 
-  _clickHandler(e) {
+  _itemClickHandler(e) {
     if (this.spa) {
       this.selected =
         e.target === e.currentTarget ? "container" : e.target.name;
     }
   }
 
+  _logoClickHandler(e) {
+    this.active = !this.active;
+  }
+
   // Render the UI as a function of component state
   render() {
     return Z`
-      <div class="wrapper" ${this.spa}>
-        <a href="https://dogecoin.org" class="selected-item-wrap">
+      <div class="wrapper">
+        <a @click=${this._logoClickHandler} class="selected-item-wrap">
           <img
             src="https://fetch.dogecoin.org/resources/img/logos/text/logo-text-foundation.png"
             alt="${this.selected} logo ${this.spa}"
           />
         </a>
-        <div class="dropdown-content" @click="${this._clickHandler}">
+        <div class="dropdown-content" @click="${this._itemClickHandler}">
           <doge-site-picker-item
             name="dogecoin"
             spa=${this.spa}
