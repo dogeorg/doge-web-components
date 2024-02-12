@@ -2,178 +2,178 @@ import { dogeComponentInit, resourceBasePath } from "../../lib/cherry.js"
 import { LitElement, css, html, classMap } from "../../lib/lit/dist@3/lit-all.min.js";
 
 export class DogeNav extends LitElement {
-	static styles = css`
-		:host {
-			width: 100%;
-			display: block;
-			position: fixed;
+  static styles = css`
+    :host {
+      width: 100%;
+      display: block;
+      position: fixed;
       top: 0px;
       z-index: 999;
 
-			/* make themeable */
-			background: var(--doge-black);
-			font-size: 1.1rem;
-		}
-		header {
-			margin: 0px auto;
-			display: flex;
-			max-height: 100px;
-			width: 100%;
-			max-width: 1440px;
+      /* make themeable */
+      background: var(--doge-black);
+      font-size: 1.1rem;
+    }
+    header {
+      margin: 0px auto;
+      display: flex;
+      max-height: 100px;
+      width: 100%;
+      max-width: 1440px;
       align-items: center;
-			justify-content: space-between;
+      justify-content: space-between;
 
-			color: #a9a9b3;
-		}
+      color: #a9a9b3;
+    }
 
-		header .logo {
-			display: inline-block;
-			padding: 7px;
-		}
+    header .logo {
+      display: inline-block;
+      padding: 7px;
+    }
 
-		header div {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			padding: 0 1rem;
-			z-index: 99;
-		}
+    header div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      z-index: 99;
+    }
 
-		header nav {
+    header nav {
       display: none;
       @media only screen and (min-width: 980px) {
         display: flex;
       }
-			flex-direction: row;
+      flex-direction: row;
       align-items: center;
-			justify-content: flex-end;
-			padding: 0 15px;
+      justify-content: flex-end;
+      padding: 0 15px;
 
-			/* TODO: theme */
-			font-family: var(--doge-font-fancy);
-		}
+      /* TODO: theme */
+      font-family: var(--doge-font-fancy);
+    }
 
-		::slotted(a),
-		::slotted(a:visited) {
-			color: #a9a9b3;
-			text-decoration: none;
+    ::slotted(a),
+    ::slotted(a:visited) {
+      color: #a9a9b3;
+      text-decoration: none;
       white-space: nowrap;
-		}
+    }
 
-		::slotted(a) {
-			display: inline-block;
-			margin: 0 9px;
-		}
+    ::slotted(a) {
+      display: inline-block;
+      margin: 0 9px;
+    }
 
-		::slotted(a:hover) {
-			color: #ffffff;
-			text-decoration: underline;
-		}
+    ::slotted(a:hover) {
+      color: #ffffff;
+      text-decoration: underline;
+    }
 
-		::slotted(a[active]) {
-			color: var(--doge-yellow);
-			text-decoration: underline;
-		}
+    ::slotted(a[active]) {
+      color: var(--doge-yellow);
+      text-decoration: underline;
+    }
 
     ::slotted(div) {
       margin: 1px 9px 0px 9px;
     }
-	`;
+  `;
 
-	constructor() {
-		super();
-	}
+  constructor() {
+    super();
+  }
 
-	connectedCallback() {
-		super.connectedCallback();
-   	dogeComponentInit();
+  connectedCallback() {
+    super.connectedCallback();
+    dogeComponentInit();
    }
 
-	render() {
-		return html`
-			<header>
-				<div>
-					<slot name="brand" class="logo"></slot>
-				</div>
-				<nav>
-					<slot></slot>
-				</nav>
+  render() {
+    return html`
+      <header>
+        <div>
+          <slot name="brand" class="logo"></slot>
+        </div>
+        <nav>
+          <slot></slot>
+        </nav>
         <slot name="mobile"></slot>
-			</header>
-		`;
-	}
+      </header>
+    `;
+  }
 }
 customElements.define("doge-nav", DogeNav);
 
 export class DogeNavList extends LitElement {
-	static styles = css`
-		.wrapper {
-			position: relative;
-			overflow: visible;
-			padding: 0px 9px;
-		}
+  static styles = css`
+    .wrapper {
+      position: relative;
+      overflow: visible;
+      padding: 0px 9px;
+    }
 
-		.inner {
-			position: absolute;
-			background: var(--doge-black);
-			display: none;
-			right: 0px;
+    .inner {
+      position: absolute;
+      background: var(--doge-black);
+      display: none;
+      right: 0px;
       text-align: right;
-			padding-top: 18px;
-			padding-bottom: 9px;
-		}
+      padding-top: 18px;
+      padding-bottom: 9px;
+    }
 
-		::slotted(a),
-		::slotted(a:visited) {
-			color: #a9a9b3;
-			text-decoration: none;
-		}
+    ::slotted(a),
+    ::slotted(a:visited) {
+      color: #a9a9b3;
+      text-decoration: none;
+    }
 
-		::slotted(a:first-child) {
-			padding: 0px;
-		}
+    ::slotted(a:first-child) {
+      padding: 0px;
+    }
 
-		::slotted(a) {
-			padding: 4.5px 18px;
-			white-space: nowrap;
-			display: block;
-		}
+    ::slotted(a) {
+      padding: 4.5px 18px;
+      white-space: nowrap;
+      display: block;
+    }
 
-		::slotted(a[active]) {
-			display: block;
-		}
+    ::slotted(a[active]) {
+      display: block;
+    }
 
-		::slotted(a:hover) {
-			color: white;
-			text-decoration: underline;
-		}
+    ::slotted(a:hover) {
+      color: white;
+      text-decoration: underline;
+    }
 
-		.wrapper:hover .inner {
-			display: block;
-		}
+    .wrapper:hover .inner {
+      display: block;
+    }
 
-		.arrow {
-			font-size: 1.1rem;
-			position: absolute;
-			top: 18px;
-			right: -5px;
-		}
-	`;
+    .arrow {
+      font-size: 1.1rem;
+      position: absolute;
+      top: 18px;
+      right: -5px;
+    }
+  `;
 
-	constructor() {
-		super();
-	}
+  constructor() {
+    super();
+  }
 
-	render() {
-		return html`
-			<div class="wrapper">
-				<slot name="selected"></slot>
-				<div class="inner">
-					<slot></slot>
-				</div>
-			</div>
-		`;
-	}
+  render() {
+    return html`
+      <div class="wrapper">
+        <slot name="selected"></slot>
+        <div class="inner">
+          <slot></slot>
+        </div>
+      </div>
+    `;
+  }
 }
 
 customElements.define("doge-nav-list", DogeNavList);
@@ -216,7 +216,7 @@ export class DogeSitePicker extends LitElement {
   constructor() {
     super();
     // Declare reactive properties and set defaults.
-    this.selected = "dogecoin";
+    this.selected = "foundation";
     this.spa;
   }
 
@@ -254,10 +254,9 @@ export class DogeSitePicker extends LitElement {
   render() {
     return html`
       <div class="wrapper" ${this.spa}>
-        <a href="${this._getURL()}" class="selected-item-wrap">
+        <a href="https://dogecoin.org" class="selected-item-wrap">
           <img
-            src="${resourceBasePath}/img/logos/text/logo-text-${this
-              .selected}.png"
+            src="https://fetch.dogecoin.org/resources/img/logos/text/logo-text-foundation.png"
             alt="${this.selected} logo ${this.spa}"
           />
         </a>
@@ -377,7 +376,7 @@ class DogeSitePickerItem extends LitElement {
         return "The Fun and Friendly Internet Currency Pioneering the Way for Community-Driven Crypto!";
         break;
       case "developers":
-        return "Unleashing Creativity, One Shibe at a Time: The Official Hub for Dogecoin Developers.";
+        return "Unleashing Creativity, One Shibe at a Time: The hub for Dogecoin Developers.";
         break;
       case "community":
         return "Join the Pack: Dogecoin's Thriving Community - Where Camaraderie, Cryptocurrency and Memes Collide!";

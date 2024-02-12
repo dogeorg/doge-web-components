@@ -21,47 +21,46 @@ const P=globalThis,C=P.trustedTypes,T=C?C.createPolicy("lit-html",{createHTML:t=
  * SPDX-License-Identifier: BSD-3-Clause
  */class ut extends ${constructor(){super(...arguments),this.renderOptions={host:this},this.ot=void 0;}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const s=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this.ot=lt(s,this.renderRoot,this.renderOptions);}connectedCallback(){super.connectedCallback(),this.ot?.setConnected(!0);}disconnectedCallback(){super.disconnectedCallback(),this.ot?.setConnected(!1);}render(){return Z}}ut._$litElement$=!0,ut[("finalized")]=!0,globalThis.litElementHydrateSupport?.({LitElement:ut});const dt=globalThis.litElementPolyfillSupport;dt?.({LitElement:ut});(globalThis.litElementVersions??=[]).push("4.0.3");
 
-class DogePal extends ut {
-	static styles = r``;
+class DogePrice extends ut {
+  static styles = r``;
 
-	static properties = {
-		imageUrl: {},
-		max_width: { attribute: true },
-		max_height: { attribute: true }
-	};
+  static properties = {
+    interval: { type: Number },
+    currency: { type: String },
+    price: { type: Number, attribute: true, reflect: true },
+  };
 
-	constructor() {
-		super();
-		this.imageUrl = undefined;
-		this.max_width = 600;
-		this.max_height = 600;
-	}
+  constructor() {
+    super();
+    this.interval = 300000; // Default interval is 5 minutes
+    this.currency = 'usd'; // Default currency is USD
+    this.price = 0; // Initialize the price property
+  }
 
-	connectedCallback() {
-		super.connectedCallback();
-		this.fetchImage();
-	}
+  connectedCallback() {
+    super.connectedCallback();
+    this.fetchPrice();
+    setInterval(() => this.fetchPrice(), this.interval);
+  }
 
-	async fetchImage() {
-		try {
-			const response = await fetch("https://dog.ceo/api/breed/shiba/images/random");
-			const data = await response.json();
-			if (data.status !== "success") {
-				throw new Error('unsuccessful response from dog.ceo api')
-			}
-			this.imageUrl = data.message;
-		} catch (error) {
-			console.error("Error fetching random image:", error);
-		}
-	}
+  async fetchPrice() {
+    try {
+      const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=${this.currency}`);
+      const data = await response.json();
+      const price = data.dogecoin[this.currency];
+      this.price = price;
+    } catch (error) {
+      console.error('Error fetching Dogecoin price:', error);
+    }
+  }
 
-	render() {
-		return q`
-			<img src="${this.imageUrl}" style="max-width: ${this.max_width}px"; max-height: ${this.max_height}px" />
-		`;
-	}
+  render() {
+    return q`
+      <span>${this.price} ${this.currency.toUpperCase()}</span>
+    `;
+  }
 }
 
-customElements.define("doge-pal", DogePal);
+customElements.define('doge-price', DogePrice);
 
-export { DogePal };
+export { DogePrice };
