@@ -1,3 +1,4 @@
 *.DS_Store
 Caddyfile
 node_modules
+dist
