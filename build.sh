@@ -21,6 +21,6 @@ echo "fetch.dogecoin.org" > CNAME
 
 # Copy the static files to the dist directory.
 cp src/index.html dist/index.html
-cp -R src/lib/ dist/lib
+cp -R src/lib dist/lib
 cp -R resources dist/
 cp -R example dist/
