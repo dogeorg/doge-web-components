@@ -15,7 +15,7 @@ for file in $JS_FILES
 do
    filename=$(basename "$file")
    echo "File: $filename"
-   rollup --input "$file" --file "docs/$filename" --format "es"
+   cp "$file" "docs/$filename"
 done
 
 # Write CNAME file
