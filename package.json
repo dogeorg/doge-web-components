@@ -6,7 +6,8 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "test": "web-test-runner \"src/**/*.test.html\" --node-resolve --playwright --browsers chromium firefox webkit",
+    "dev": "web-dev-server --open example/ --node-resolve --watch",
+    "test": "web-test-runner \"src/**/*.test.html\" --node-resolve --playwright --browsers --chromium firefox webkit",
     "test:watch": "web-test-runner src/**/*.test.html --node-resolve --watch"
   },
   "devDependencies": {
