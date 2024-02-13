@@ -8,13 +8,14 @@ export class DogeNav extends LitElement {
   static styles = css`
     :host {
       width: 100%;
+      min-height: 62px;
       display: block;
       position: fixed;
       top: 0px;
       z-index: 999;
 
       /* make themeable */
-      background: var(--doge-black);
+      background-color: var(--doge-black);
       font-size: 1.1rem;
     }
     header {

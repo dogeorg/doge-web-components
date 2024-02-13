@@ -1,0 +1,18 @@
+{
+  "name": "doge-web-components",
+  "version": "1.0.0",
+  "description": "Reusable web components for Dogecoin",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "test": "web-test-runner \"src/**/*.test.html\" --node-resolve --playwright --browsers chromium firefox webkit",
+    "test:watch": "web-test-runner src/**/*.test.html --node-resolve --watch"
+  },
+  "devDependencies": {
+    "@open-wc/testing": "2.5.33",
+    "@web/dev-server": "0.2.1",
+    "@web/test-runner": "0.16.0",
+    "@web/test-runner-playwright": "^0.11.0"
+  }
+}
