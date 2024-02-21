@@ -33,7 +33,7 @@
           })
 
           // Adding a test that deliberately fails checking that CI prevents deployment.
-          it('renders a gif', async () => {
+          it('renders a gif (will fail)', async () => {
             const el = await fixture(html`
               <doge-qr address="foo"></doge-qr>
             `);
