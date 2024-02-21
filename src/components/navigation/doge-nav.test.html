@@ -1,0 +1,98 @@
+<html>
+  <body>
+    <script type="module">
+      import { html, fixture, expect } from "@open-wc/testing";
+      import { runTests } from "@web/test-runner-mocha";
+      import "./doge-nav.js";
+
+      runTests(async () => {
+        describe("DogeNav", () => {
+
+          it('by default, displays a black navigation bar', async () => {
+            const el = await fixture(html`
+              <doge-nav>
+                <a>Home</a>
+                <a>About</a>
+                <a>Community</a>
+              </doge-nav>
+            `);
+
+            // Get the computed style of the doge-nav element
+            const computedStyle = getComputedStyle(el);
+
+            // Assert some default styles exist
+            expect(computedStyle.minHeight).to.equal('62px');
+            expect(computedStyle.backgroundColor).to.equal('rgba(0, 0, 0, 0)');
+          })
+
+          it('displays provided anchor elements in the unamed slot', async () => {
+            const el = await fixture(html`
+              <doge-nav>
+                <a>Home</a>
+                <a>About</a>
+                <a>Community</a>
+                <a>Much Charity</a>
+                <a>Very Wow</a>
+              </doge-nav>
+            `);
+
+            const defaultSlot = el.shadowRoot.querySelector('slot:not([name])');
+            const defaultSlotAssignedElements = defaultSlot.assignedElements();
+
+            expect(defaultSlotAssignedElements.length).to.equal(5);
+          })
+
+          it('displays content in the brand slot when provided', async () => {
+            const el = await fixture(html`
+              <doge-nav>
+                <img slot="brand" />
+                <a>Home</a>
+                <a>About</a>
+                <a>Community</a>
+                <a>Much Charity</a>
+                <a>Very Wow</a>
+              </doge-nav>
+            `);
+
+            const brandSlot = el.shadowRoot.querySelector('slot[name="brand"]');
+            const defaultSlot = el.shadowRoot.querySelector('slot:not([name])');
+
+            const brandSlotAssignedElements = brandSlot.assignedElements();
+            const defaultSlotAssignedElements = defaultSlot.assignedElements();
+
+            expect(brandSlotAssignedElements.length).to.equal(1);
+            expect(defaultSlotAssignedElements.length).to.equal(5);
+          })
+
+          it('displays content in the mobile slot when provided', async () => {
+            const el = await fixture(html`
+              <doge-nav>
+                <img slot="brand" />
+                <a>Home</a>
+                <a>About</a>
+                <a>Community</a>
+                <a>Much Charity</a>
+                <a>Very Wow</a>
+                <a slot="mobile">Get App</mobile>
+              </doge-nav>
+            `);
+
+            const brandSlot = el.shadowRoot.querySelector('slot[name="brand"]');
+            const defaultSlot = el.shadowRoot.querySelector('slot:not([name])');
+            const mobileSlot = el.shadowRoot.querySelector('slot[name="mobile"]');
+
+            const brandSlotAssignedElements = brandSlot.assignedElements();
+            const defaultSlotAssignedElements = defaultSlot.assignedElements();
+            const mobileSlotAssignedElements = mobileSlot.assignedElements();
+
+            expect(brandSlotAssignedElements.length).to.equal(1);
+            expect(defaultSlotAssignedElements.length).to.equal(5);
+            expect(mobileSlotAssignedElements.length).to.equal(1);
+            
+          })
+
+        });
+      });
+    </script>
+  </body>
+</html>

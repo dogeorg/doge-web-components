@@ -1,0 +1,39 @@
+<html>
+  <body>
+    <script type="module">
+      import { html, fixture, expect } from "@open-wc/testing";
+      import { runTests } from "@web/test-runner-mocha";
+      import "./doge-qr.js";
+
+      runTests(async () => {
+        describe("DogeQR", () => {
+
+          it('displays an SVG when an address is provided', async () => {
+            const el = await fixture(html`
+              <doge-qr address="foo"></doge-qr>
+            `);
+            const nodes = el.shadowRoot.querySelectorAll("svg")
+            expect(nodes.length).to.equal(1);
+          })
+
+          it('does not display a caption by default', async () => {
+            const el = await fixture(html`
+              <doge-qr address="foo"></doge-qr>
+            `);
+            const nodes = el.shadowRoot.querySelectorAll(".caption")
+            expect(nodes.length).to.equal(0);
+          })
+
+          it('displays a caption when provided', async () => {
+            const el = await fixture(html`
+              <doge-qr address="foo" caption="buy me a coffee?"></doge-qr>
+            `);
+            const text = el.shadowRoot.querySelector(".caption").textContent
+            expect(text).to.equal("buy me a coffee?");
+          })
+
+        });
+      });
+    </script>
+  </body>
+</html>
