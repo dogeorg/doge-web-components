@@ -10,6 +10,7 @@ export class DogeQR extends LitElement {
 		address: {},
 		logo: {},
 		qrCanvas: {},
+		caption: {},
 	};
 
 	constructor() {
@@ -17,6 +18,7 @@ export class DogeQR extends LitElement {
 		this.address = "";
 		this.logo = true;
 		this.qrCanvas
+		this.caption = ""
 	}
 
 	firstUpdated() {
@@ -54,7 +56,13 @@ export class DogeQR extends LitElement {
 	}
 
 	render() {
-		return html`<div id="qrCanvas"></div>`;
+		return html`
+			<div class="container">
+				<div id="qrCanvas"></div>
+				${this.caption
+					? html`<span class="caption">${this.caption}</span>`
+					: '' }
+			</div>`;
 	}
 }
 customElements.define("doge-qr", DogeQR);
