@@ -14,6 +14,12 @@
     "@open-wc/testing": "2.5.33",
     "@web/dev-server": "0.2.1",
     "@web/test-runner": "0.16.0",
-    "@web/test-runner-playwright": "^0.11.0"
+    "@web/test-runner-playwright": "^0.11.0",
+    "husky": "^9.0.11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
   }
 }
