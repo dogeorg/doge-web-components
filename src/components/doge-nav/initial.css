@@ -1,0 +1,6 @@
+doge-nav:not(:defined) {
+    display: block;
+    height: 62px;
+    overflow: hidden;
+    opacity: 0;
+}
