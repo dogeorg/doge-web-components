@@ -5,14 +5,26 @@ rm -rf dist
 mkdir -p dist
 
 # Find all JavaScript files within src/components directory
-JS_FILES=$(find src/components -type f -name "*.js")
+JS_FILES=$(find src/components -type f -name "doge-*.js")
+CSS_FILES=$(find src/components -type f -name "*initial.css")
 
-# For each file, compile via rollup, outputting as individual JS modules.
+# For each JS file, copy it to the root for convenient
+# consumption from fetch.dogecoin.org/<component>.js
 for file in $JS_FILES
 do
    filename=$(basename "$file")
    echo "File: $filename"
    cp "$file" "dist/$filename"
+done
+
+# For each css file, concatinate and create a single file
+# for component consumers to include within the <head>
+# of their webpage, to reduce flash of unstyled content.
+for file in $CSS_FILES
+do
+   echo "File: $file"
+   cat "$file" >> "dist/initial.css"
+   echo >> "dist/initial.css" #Adds line
 done
 
 # Write CNAME file

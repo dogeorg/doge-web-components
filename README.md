@@ -10,7 +10,7 @@ add them to your webpage and voilà!
 
 ### 1. Cherry Pick (Under development)
 
-Quick and easy.
+**Quick and easy**
 Within your HTML file, add a doge component and start using it.
 
 ```
@@ -18,9 +18,15 @@ Within your HTML file, add a doge component and start using it.
 <doge-qr address="D89DhnsgKncmN12RejxudfU8AwXp3946q1" caption="Treat me a coffee?"></doge-qr>
 ```
 
+**Optionally**, add the initial.css stylesheet to the head of your page to prevent/reduce FOUC (flash of unstyled content).
+
+```
+<link rel="stylesheet" href="https://fetch.dogecoin.org/initial.css"
+```
+
 ---
 
-### 2. Fetch Lib (Coming Soon)
+### 2. Fetch Lib (Concept)
 
 Within your HTML file, add configure.js, configure and utilise.
 
