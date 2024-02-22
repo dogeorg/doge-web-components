@@ -2,8 +2,8 @@ import {
   dogeComponentInit,
   resourceBasePath,
   LitElement, css, html, classMap
-} from "../lib/cherry.js"
-import "../../resources/blocks/qr-code-styling@1.5.0/qr-code-styling.js";
+} from "../../lib/cherry.js"
+import "../../../resources/blocks/qr-code-styling@1.5.0/qr-code-styling.js";
 
 export class DogeQR extends LitElement {
 	static properties = {

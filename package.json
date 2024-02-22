@@ -7,8 +7,8 @@
   "license": "ISC",
   "scripts": {
     "dev": "web-dev-server --open example/ --node-resolve --watch",
-    "test": "web-test-runner \"src/**/*test.html\" --node-resolve --playwright --browsers firefox",
-    "test:watch": "web-test-runner src/**/*.test.html --node-resolve --watch",
+    "test": "web-test-runner \"src/**/test.html\" --node-resolve --playwright --browsers firefox",
+    "test:watch": "web-test-runner src/**/test.html --node-resolve --watch",
     "prepare": "husky"
   },
   "devDependencies": {

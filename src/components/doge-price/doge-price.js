@@ -2,7 +2,7 @@ import {
   dogeComponentInit,
   resourceBasePath,
   LitElement, css, html, classMap
-} from "../lib/cherry.js"
+} from "../../lib/cherry.js"
 
 export class DogePrice extends LitElement {
   static styles = css``;
