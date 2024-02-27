@@ -8,64 +8,56 @@ import "../../../resources/blocks/qr-code-styling@1.5.0/qr-code-styling.js";
 export class DogeQR extends LitElement {
 	static properties = {
 		address: {},
-    caption: {},
-    colorBg: {},
-    colorFg: {},
-    noBorder: { type: Boolean },
-    noLogo: { type: Boolean },
+    amount: {},
+    background: {},
+    fill: {},
+    img: {},
     size: {},
     theme: {},
 		qrCanvas: {},
 	};
   static sizes = {
-    sm: 100,
-    md: 200,
-    lg: 300,
-    xl: 400,
+    sm: 120,
+    md: 220,
+    lg: 320,
+    xl: 420,
   }
   static themes = {
     'such-doge': {
-      colorFg: "#de9a1e, #ffc107, #de9a1e",
-      colorBg: "white",
-      image: `https://fetch.dogecoin.test/resources/img/qr/such-cool-2.png`,
+      fill: "#de9a1e, #ffc107",
+      background: "white",
+      image: `${resourceBasePath}/img/qr/such-doge.png`,
     },
     'much-dev': {
-      colorFg: "#7020c8, #02f8da, #312147",
-      colorBg: "white",
-      image: `${resourceBasePath}/img/logos/circle/logo-circle-developers.png`,
+      fill: "#7020c8, #02f8da",
+      background: "white",
+      image: `${resourceBasePath}/img/qr/much-dev.png`,
     },
     'so-coin': {
-      colorFg: "#ac8639, #ceab4b, #755b35",
-      colorBg: "white",
-      image: `${resourceBasePath}/img/logos/circle/logo-circle-dogecoin.png`,
+      fill: "#ac8639, #ceab4b",
+      background: "white",
+      image: `${resourceBasePath}/img/qr/so-coin.png`,
     },
     'very-community': {
-      colorFg: "#7e3357, #f44e9f, #7e3357",
-      colorBg: "white",
-      image: `https://fetch.dogecoin.org/resources/img/logos/circle/logo-circle-community.png`,
-    }
+      fill: "#7e3357, #f44e9f",
+      background: "white",
+      image: `${resourceBasePath}/img/qr/very-community.png`,
+    },
   }
 
   static styles = css`
-    .container {
+    .qr-container {
       display: inline-block;
-      padding: 0.3em;
-    }
-    .container[noborder="true"] {
-      padding: 0 !important;
-      background: red;
     }
   `;
 
 	constructor() {
 		super();
-    this.colorFg = "#ffc107";
-    this.colorBg = "white";
     this.size = "md";
-		this.qrCanvas
+    this.qrCanvas;
 	}
 
-  generateColorStops(colors) {
+  generateColorStops(colors = "") {
     const colorArray = colors.split(',').map(c => c.trim());
     return colorArray.map((c, index) => ({
       offset: index,
@@ -74,43 +66,63 @@ export class DogeQR extends LitElement {
   }
 
   applyTheme() {
+    let image = ''
+    if (this.img) {
+      image = this.img
+    }
     if (!this.theme) {
       return {
+        image,
         backgroundOptions: {
-          color: this.colorBg
+          color: this.background
         },
         dotsOptions: {
           gradient: {
             type: "linear",
-            colorStops: this.generateColorStops(this.colorFg)
+            colorStops: this.generateColorStops(this.fill)
           }
         }
       }
     }
 
+    if (this.theme) {
+      image = DogeQR.themes[this.theme].image
+    }
+
     return {
-      image: this.noLogo ? '' : DogeQR.themes[this.theme].image,
+      image,
       backgroundOptions: {
-        color: DogeQR.themes[this.theme].colorBg
+        color: DogeQR.themes[this.theme].background
       },
       dotsOptions: {
         gradient: {
           type: "linear",
-          colorStops: this.generateColorStops(DogeQR.themes[this.theme].colorFg)
+          colorStops: this.generateColorStops(DogeQR.themes[this.theme].fill)
         }
       }
     }
   }
 
+  generateQrValue() {
+    if (!this.address) {
+      return "Address not provided."
+    }
+    return `dogecoin://${this.address}${this.appendAmount()}`
+  }
+
+  appendAmount() {
+    if (!this.amount || isNaN(this.amount)) return ''
+    return `?amount=${this.amount}`
+  }
+
 	firstUpdated() {
 		this.qrCanvas = this.renderRoot.querySelector('#qrCanvas');
-
  		try {
 			const qrCode = new QRCodeStyling({
 				width: DogeQR.sizes[this.size],
 				height: DogeQR.sizes[this.size],
 				type: "svg",
-				data: this.address,
+				data: this.generateQrValue(),
         imageOptions: {
           crossOrigin: "anonymous",
           hideBackgroundDots: false,
@@ -127,13 +139,6 @@ export class DogeQR extends LitElement {
 		}
 	}
 
-  getBackroundColor() {
-    if (this.theme) {
-      return DogeQR.themes[this.theme].colorBg
-    }
-    return '';
-  }
-
 	connectedCallback() {
 		super.connectedCallback();
 		dogeComponentInit();
@@ -141,11 +146,8 @@ export class DogeQR extends LitElement {
 
 	render() {
 		return html`
-			<div class="container" noborder=${this.noBorder} style="background-color: ${this.getBackroundColor()}">
+			<div class="qr-container">
 				<div id="qrCanvas"></div>
-				${this.caption
-					? html`<span class="caption">${this.caption}</span>`
-					: '' }
 			</div>`;
 	}
 }
