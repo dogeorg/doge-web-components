@@ -125,7 +125,7 @@ export class DogeQR extends LitElement {
 				data: this.generateQrValue(),
         imageOptions: {
           crossOrigin: "anonymous",
-          hideBackgroundDots: true,
+          hideBackgroundDots: false,
           imageSize: 0.4,
           margin: 0
         },
