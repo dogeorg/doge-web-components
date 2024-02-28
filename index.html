@@ -1,10 +1,45 @@
 <html>
-	<head>
-		<title id="title">Doge Components</title>
-	</head>
-	<body>
-		<h1>Placeholder</h1>
-		<h3>Landing page for fetch.dogecoin.org</h3>
-		<p>The purpose of this static page is to introduce and promote the Doge Components and lead people to the docs for more info.</p>
-	</body>
+  <head>
+    <title id="title">Doge Components</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="resources/css/doge-components.css" />
+  </head>
+  <body>
+    
+        <div class="page">
+      <header>
+        <h1><span class="sans">&lt;doge&gt; </span><span class="soft comic">components</span></h1>
+      </header>
+
+      <section>
+        <h2>Purpose</h2>
+        <hr />
+        <p>Reusable web components for Doge things.</p>
+      </section>
+      <section>
+        <h2>Components</h2>
+        <hr />
+        <ul></ul>
+      </section>
+    <script>
+      fetch('manifest.json')
+        .then(response => response.json())
+        .then(data => {
+          const components = data.components;
+          const ul = document.querySelector('ul');
+
+          for (const component in components) {
+            const li = document.createElement('li');
+            const anchor = document.createElement('a');
+            anchor.href = component;
+            anchor.innerText = component;
+            li.appendChild(anchor);
+            ul.appendChild(li);
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    </script>
+  </body>
 </html>
