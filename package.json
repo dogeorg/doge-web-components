@@ -6,7 +6,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "dev": "web-dev-server --open / --port 8080 --node-resolve --watch",
+    "dev": "web-dev-server --open /src/index.html --port 8080 --node-resolve --watch",
     "serve": "web-dev-server --root-dir dist --port 9090 --node-resolve --watch --open /",
     "test": "web-test-runner \"src/**/test.html\" --node-resolve --playwright --browsers firefox",
     "test:watch": "web-test-runner src/**/test.html --node-resolve --watch",
