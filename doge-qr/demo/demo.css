@@ -1,0 +1,127 @@
+html { font-family: sans-serif }
+* {
+  box-sizing: border-box;
+}
+h1, h2, h3, h4, h5 {
+  font-family: var(--doge-font-fancy);
+}
+.page {
+  width: 600px;
+  margin: 0px 0px;
+  padding: 20px;
+}
+h1 {
+  margin-bottom: 20px;
+}
+.sans {
+  font-family: sans-serif;
+}
+.comic {
+  font-family: var(--doge-font-fancy);
+}
+p { line-height: 1.2 }
+.soft {
+  color: #ccc;
+}
+section {
+  margin-bottom: 4em;
+}
+hr {
+  transform: rotateZ(0.5deg);
+  border-bottom: none;
+  border-top: 1px solid #333;
+  margin-top: 1em;
+}
+table {
+  border-collapse: collapse;
+}
+table tr {
+  border-bottom: 1px solid #ccc;
+}
+table tr th {
+  font-family: var(--doge-font-fancy);
+  font-size: 1.1rem;
+  padding: 1rem 1rem;
+  text-align: left;
+}
+table tr td {
+  padding: 1rem 1rem;
+  text-align: left;
+}
+code {
+  display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  background-color: #f3f3f4;
+}
+code.nowrap {
+  white-space: nowrap;
+}
+table.props-list tr td:first-child code {
+  font-family: monospace;
+  background-color: #e6e6e7;
+}
+
+span.note {
+  display: block;
+  font-size: 1rem;
+  margin: 0.5em 0;
+}
+.container {
+  margin: 0px auto;
+  width: 660px;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 220px 220px 220px;
+  grid-row: auto auto;
+  grid-column-gap: 40px;
+  grid-row-gap: 0px;
+
+  .box {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+
+    span {
+      padding: 10px;
+    }
+
+    .customise-label {
+      display: inline-block;
+      margin: 0px;
+      padding: 0px;
+      transform: rotateZ(-10deg);
+      position: relative;
+      overflow: hidden;
+      top: 140px;
+    }
+    .customise-arrow {
+      transform: scaleX(-1) rotateZ(40deg);
+      height: 90px;
+      position: relative;
+      top: 160px;
+      left: 30px;
+    }
+  }
+}
+
+#CodeContainer .code-toolbar {
+  display: none;
+}
+
+#CodeContainer .code-toolbar:first-child {
+  display: block;
+}
+
+footer {
+  margin: 0 auto;
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  padding: 10px 20px;
+  text-align: center;
+}
