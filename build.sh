@@ -7,13 +7,14 @@ mkdir -p dist
 # Find all JavaScript files within src/components directory
 JS_FILES=$(find src/components -type f -name "doge-*.js")
 CSS_FILES=$(find src/components -type f -name "*initial.css")
+DEMO_DIRS==$(find src/components -type d -name "demo")
 
 # For each JS file, copy it to the root for convenient
 # consumption from fetch.dogecoin.org/<component>.js
 for file in $JS_FILES
 do
    filename=$(basename "$file")
-   echo "File: $filename"
+   echo "JS File: $filename"
    cp "$file" "dist/$filename"
 done
 
@@ -22,9 +23,19 @@ done
 # of their webpage, to reduce flash of unstyled content.
 for file in $CSS_FILES
 do
-   echo "File: $file"
+   echo "CSS File: $file"
    cat "$file" >> "dist/initial.css"
    echo >> "dist/initial.css" #Adds line
+done
+
+# Collect every component demo directory
+# Copy it to /dist/<component>/demo
+for demo_dir in $DEMO_DIRS
+do
+  component_dirname=$(basename "$(dirname "$demo_dir")")
+  echo "DEMO Dir: $component_dirname"
+  mkdir -p "dist/$component_dirname"
+  cp -R "src/components/$component_dirname/demo/" "dist/$component_dirname/"
 done
 
 # Write CNAME file
