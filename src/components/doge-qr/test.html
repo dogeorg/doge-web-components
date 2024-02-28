@@ -8,6 +8,24 @@
       runTests(async () => {
         describe("DogeQR", () => {
 
+          it('produces a correctly formatted dogecoin URI when given an address', async () => {
+            const el = await fixture(html`
+              <doge-qr address="foobar"></doge-qr>
+            `);
+            const expectedValue = 'dogecoin:foobar'
+            const div = el.shadowRoot.querySelector('.qr-container');
+            expect(div.getAttribute('data-qr-value')).to.equal(expectedValue);
+          })
+
+          it('produces a correctly formatted dogecoin URI when given an address and amount', async () => {
+            const el = await fixture(html`
+              <doge-qr address="foobar" amount=50></doge-qr>
+            `);
+            const expectedValue = 'dogecoin:foobar?amount=50'
+            const div = el.shadowRoot.querySelector('.qr-container');
+            expect(div.getAttribute('data-qr-value')).to.equal(expectedValue);
+          })
+
           it('displays an SVG when an address is provided', async () => {
             const el = await fixture(html`
               <doge-qr address="foo"></doge-qr>

@@ -107,7 +107,7 @@ export class DogeQR extends LitElement {
     if (!this.address) {
       return "Address not provided."
     }
-    return `dogecoin://${this.address}${this.appendAmount()}`
+    return `dogecoin:${this.address}${this.appendAmount()}`
   }
 
   appendAmount() {
@@ -125,8 +125,8 @@ export class DogeQR extends LitElement {
 				data: this.generateQrValue(),
         imageOptions: {
           crossOrigin: "anonymous",
-          hideBackgroundDots: false,
-          imageSize: 0.5,
+          hideBackgroundDots: true,
+          imageSize: 0.4,
           margin: 0
         },
         ...this.applyTheme(),
@@ -146,7 +146,7 @@ export class DogeQR extends LitElement {
 
 	render() {
 		return html`
-			<div class="qr-container">
+			<div class="qr-container" data-qr-value="${this.generateQrValue()}">
 				<div id="qrCanvas"></div>
 			</div>`;
 	}
