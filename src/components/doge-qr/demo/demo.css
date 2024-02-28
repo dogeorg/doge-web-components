@@ -10,6 +10,25 @@ h1, h2, h3, h4, h5 {
   margin: 0px 0px;
   padding: 20px;
 }
+header {
+  margin-bottom: 50px;
+}
+
+a.yellow {
+  color: #de9a1e;
+}
+a.yellow:hover {
+  color: #ffc107;
+}
+
+.mono {
+  font-family: monospace;
+}
+
+.small {
+  font-size: .8rem;
+}
+
 h1 {
   margin-bottom: 20px;
 }
