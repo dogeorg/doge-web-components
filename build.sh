@@ -35,7 +35,7 @@ do
   component_dirname=$(basename "$(dirname "$demo_dir")")
   echo "DEMO Dir: $component_dirname"
   mkdir -p "dist/$component_dirname"
-  cp -R "src/components/$component_dirname/demo/" "dist/$component_dirname/"
+  cp -R "src/components/$component_dirname/demo/." "dist/$component_dirname/."
 done
 
 # Write CNAME file
