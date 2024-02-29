@@ -1,25 +1,50 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="resources/img/favicon.ico" type="image/x-icon">
+    <title>Doge Web Components</title>
+
     <title id="title">Doge Components</title>
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="resources/css/doge-components.css" />
   </head>
   <body>
     
-        <div class="page">
+    <div class="page">
       <header>
-        <h1><span class="sans">&lt;doge&gt; </span><span class="soft comic">components</span></h1>
+        <h1>
+          <span class="bone">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+              <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+              <path d="M153.7 144.8c6.9 16.3 20.6 31.2 38.3 31.2H384c17.7 0 31.4-14.9 38.3-31.2C434.4 116.1 462.9 96 496 96c44.2 0 80 35.8 80 80c0 30.4-17 56.9-42 70.4c-3.6 1.9-6 5.5-6 9.6s2.4 7.7 6 9.6c25 13.5 42 40 42 70.4c0 44.2-35.8 80-80 80c-33.1 0-61.6-20.1-73.7-48.8C415.4 350.9 401.7 336 384 336H192c-17.7 0-31.4 14.9-38.3 31.2C141.6 395.9 113.1 416 80 416c-44.2 0-80-35.8-80-80c0-30.4 17-56.9 42-70.4c3.6-1.9 6-5.5 6-9.6s-2.4-7.7-6-9.6C17 232.9 0 206.4 0 176c0-44.2 35.8-80 80-80c33.1 0 61.6 20.1 73.7 48.8z"/>
+            </svg>
+          </span>
+          <span class="sans">&lt;fetch&gt; </span>
+          <span class="soft comic">components</span>
+        </h1>
       </header>
 
       <section>
         <h2>Purpose</h2>
         <hr />
-        <p>Reusable web components for Doge things.</p>
+        <p>Reusable web components for Dogecoin things.</p>
       </section>
+
       <section>
         <h2>Components</h2>
         <hr />
         <ul></ul>
+      </section>
+
+      <section>
+        <h2>Contribute</h2>
+        <hr />
+        <p>
+          Discuss, share ideas, and ask questions at <a href="https://forum.dogecoin.org/t/fetch"  target="_blank">forum.dogecoin.org/t/fetch</a>. Additionally, developers can contribute components to the project via <a href="https://github.com/dogeorg/doge-web-components" target="_blank">GitHub</a>.
+        </p>
+        <p>Be a <a href="https://github.com/dogecoinfoundation/policy/blob/main/policy_02_conduct.md#good-shibes" target="_blank">Good Shibe</a> when contributing  :)</p>
       </section>
     <script>
       fetch('manifest.json')

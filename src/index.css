@@ -90,3 +90,9 @@ footer {
   padding: 10px 20px;
   text-align: center;
 }
+
+.bone svg {
+  height: 30px;
+  transform: rotateZ(-15deg) translateY(5px);
+  margin-right: 10px;
+}
