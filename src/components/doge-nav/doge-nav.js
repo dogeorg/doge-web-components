@@ -2,7 +2,7 @@ import {
   dogeComponentInit,
   resourceBasePath,
   LitElement, css, html, classMap
-} from "../../lib/cherry.js"
+} from "../../lib/doge-init.js"
 
 export class DogeNav extends LitElement {
   static styles = css`

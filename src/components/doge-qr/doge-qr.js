@@ -1,8 +1,7 @@
 import { 
-  dogeComponentInit,
   resourceBasePath,
-  LitElement, css, html, classMap
-} from "../../lib/cherry.js"
+  LitElement, css, html
+} from "../../lib/doge-init.js"
 import "../../../resources/blocks/qr-code-styling@1.5.0/qr-code-styling.js";
 
 export class DogeQR extends LitElement {
@@ -17,10 +16,10 @@ export class DogeQR extends LitElement {
 		qrCanvas: {},
 	};
   static sizes = {
-    sm: 120,
+    sm: 80,
     md: 220,
-    lg: 320,
-    xl: 420,
+    lg: 340,
+    xl: 480,
   }
   static themes = {
     'such-doge': {
@@ -141,7 +140,6 @@ export class DogeQR extends LitElement {
 
 	connectedCallback() {
 		super.connectedCallback();
-		dogeComponentInit();
 	}
 
 	render() {
