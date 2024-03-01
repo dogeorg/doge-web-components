@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript">
+      if (!window.location.pathname.endsWith("/")) {
+        window.location.href = window.location.pathname + "/";
+      }
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="../../../../resources/img/favicon.ico"
+      type="image/x-icon"
+    />
+    <title>Doge Web Components | doge-qr</title>
+
+    <link rel="stylesheet" href="../../../index.css" />
+    <!-- <link rel="stylesheet" href="demo.css" /> -->
+    <link
+      rel="stylesheet"
+      href="../../../../resources/blocks/prism/prism.css"
+    />
+    <script
+      type="text/javascript"
+      src="../../../../resources/blocks/prism/prism.js"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="../../../../resources/css/doge-components.css"
+    />
+    <!-- <link rel="stylesheet" href="../initial.css" /> -->
+    <script type="module" src="../doge-yay.js"></script>
+  </head>
+  <body>
+    <!--     <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function() {
+        const QRWrappers = document.getElementsByClassName("qr-wrapper");
+        const CodeContainer = document.getElementById("CodeContainer");
+        for (var i = 0; i < QRWrappers.length; i++) {
+          QRWrappers[i].addEventListener("click", function() {
+            var divContents = this.innerHTML;
+            var scriptElement = document.createElement("script");
+            
+            scriptElement.type = "text/plain";
+            scriptElement.className = "language-html";
+            scriptElement.innerHTML = divContents
+
+            if (CodeContainer.hasChildNodes()) {
+              CodeContainer.replaceChild(scriptElement, CodeContainer.firstChild);
+            } else {
+              CodeContainer.appendChild(scriptElement);
+            };
+            Prism.highlightElement(scriptElement);
+          });
+        }
+      });
+    </script> -->
+
+    <div class="page">
+      <header>
+        <a href="../">← Back</a>
+        <h1>
+          <span class="sans">&lt;doge-yay&gt; </span
+          ><span class="soft comic">web component</span>
+        </h1>
+      </header>
+
+      <section>
+        <h2>Purpose</h2>
+        <hr />
+        <p>...</p>
+
+        <doge-yay>
+          <img src="doge-variety.jpg" />
+        </doge-yay>
+
+        <p>
+          The example below is populated with doge-text elements at specific
+          coordinates, obtained from double clicking the component above. Their
+          position will not change.
+        </p>
+
+        <doge-yay useslotted>
+          <img src="doge-variety.jpg" />
+          <div slot="baked">
+            <doge-text x="210" y="100" r="-18" c="pink">such wow</doge-text>
+            <doge-text x="358" y="208" r="-33" c="blue">so doge</doge-text>
+            <doge-text x="476" y="86" r="34" c="yellow">very meme</doge-text>
+            <doge-text x="122" y="469" r="47" c="green">much cool</doge-text>
+            <doge-text x="383" y="451" r="75" c="red">such fun</doge-text>
+          </div>
+        </doge-yay>
+      </section>
+
+      <section>
+        <h2>Usage</h2>
+        <hr />
+        <p>1. Add the script to your webpage.</p>
+
+        <pre><code class="language-markup">
+          &lt;script
+            type="module"
+            src="https://fetch.dogecoin.org/doge-yay.js"&gt;
+          &lt;/script&gt;
+          </code></pre>
+
+        <p>2. Place one or more doge-qr elements on your page, anywhere.</p>
+        <div id="CodeContainer">
+          <script type="text/plain" class="language-html">
+            <doge-yay>
+              <img src="foo.jpg" />
+            </doge-yay>
+          </script>
+        </div>
+
+        <p>3. ...</p>
+      </section>
+
+      <section>
+        <h2>Properties</h2>
+        <hr />
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">foo</code></td>
+            <td>...</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Styling</h2>
+        <hr />
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">size</code></td>
+            <td>...</td>
+          </tr>
+        </table>
+      </section>
+    </div>
+  </body>
+</html>

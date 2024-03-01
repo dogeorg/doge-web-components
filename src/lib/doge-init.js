@@ -1,14 +1,6 @@
 // import { setBasePath } from '../../resources/blocks/shoelace@2.12.0/utilities/base-path.js';
-import { LitElement, css, html, classMap } from "./lit/dist@3/lit-local.js";
-
+export { LitElement, css, html, classMap, styleMap } from "./lit/dist@3/lit-all.min.js";
 export const resourceBasePath = "https://fetch.dogecoin.org/resources"
-
-export {
-	LitElement,
-	css,
-	html,
-	classMap
-}
 
 export function dogeComponentInit() {
 	// Ensures the page utilising the component has the base doge components stylesheet
