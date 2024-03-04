@@ -4,6 +4,8 @@ import "../doge-text.js";
 export class DogeYay extends LitElement {
   static properties = {
     useSlotted: { type: Boolean },
+    imageWidth: { type: Number },
+    imageHeight: { type: Number },
   };
 
   static styles = css`
@@ -18,6 +20,14 @@ export class DogeYay extends LitElement {
     .meme-container {
       position: relative;
       overflow: hidden; /* Add this to hide text spilling over */
+    }
+    .baked {
+      display: block;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0px;
+      left: 0px;
     }
     img {
       width: var(--image-width);
@@ -47,6 +57,8 @@ export class DogeYay extends LitElement {
   constructor() {
     super();
     this.useSlotted = false; // By default, do not use slotted elements
+    this.imageWidth = 0;
+    this.imageHeight = 0;
     this.texts = [
       { text: "such wow", color: "pink" },
       { text: "so doge", color: "blue" },
@@ -56,7 +68,8 @@ export class DogeYay extends LitElement {
     ];
   }
 
-  firstUpdated() {
+  connectedCallback() {
+    super.connectedCallback();
     this.addEventListener("dblclick", this.handleDoubleClick);
   }
 
@@ -68,21 +81,8 @@ export class DogeYay extends LitElement {
   handleDoubleClick = (event) => {
     // Ensure the double-click is on the meme-container, not just on a meme-text
     let serializedStates = "";
-    const memeTexts = this.shadowRoot.querySelectorAll(".meme-text");
-
-    memeTexts.forEach((memeText) => {
-      const computedStyle = window.getComputedStyle(memeText);
-      const x = parseInt(computedStyle.left);
-      const y = parseInt(computedStyle.top);
-      const r = this.extractRotation(computedStyle.transform);
-      const textContent = memeText.textContent.trim();
-      const color = memeText.style.color; // Assuming inline styles are being used for color
-
-      // Append the serialized state for each meme text
-      serializedStates += `<doge-text x="${x}" y="${y}" r="${r}" c="${color}">${textContent}</doge-text>\n`;
-    });
-
-    serializedStates = `<div slot="baked">${serializedStates}</div>`;
+    const memeTexts = this.shadowRoot.querySelector(".baked");
+    serializedStates = `<div slot="baked">${memeTexts.innerHTML}</div>`;
 
     // Copy all serialized states to clipboard
     navigator.clipboard
@@ -109,7 +109,7 @@ export class DogeYay extends LitElement {
   }
 
   // Function to generate random coordinates based on the number of items
-  getRandomPosition(index, total) {
+  getRandomPosition2(index, total) {
     // Define a margin as a percentage to prevent text from sticking to the edges
     const margin = 15; // You can adjust this value as needed
     const gridSize = Math.ceil(Math.sqrt(total));
@@ -137,26 +137,56 @@ export class DogeYay extends LitElement {
       row === gridSize - 1 ? top : top + Math.random() * cellHeight;
 
     return {
-      top: `${finalTop}%`,
-      left: `${finalLeft}%`,
+      top: `${Math.round(finalTop)}%`,
+      left: `${Math.round(finalLeft)}%`,
     };
+  }
+
+  getRandomPosition(index, total, width, height) {
+    const margin = 15; // Margin in pixels
+    const gridSize = Math.ceil(Math.sqrt(total));
+    const cellWidth = (width - 2 * margin) / (gridSize - 1);
+    const cellHeight = (height - 2 * margin) / (gridSize - 1);
+    const row = Math.floor(index / gridSize);
+    const col = index % gridSize;
+    const left = margin + col * cellWidth;
+    const top = margin + row * cellHeight;
+    const finalLeft = col === gridSize - 1 ? left : left + Math.random() * cellWidth;
+    const finalTop = row === gridSize - 1 ? top : top + Math.random() * cellHeight;
+    return {
+      top: finalTop, // Value in pixels
+      left: finalLeft // Value in pixels
+    };
+  }
+
+  updateImageDimensions() {
+    const slot = this.shadowRoot.querySelector('slot');
+    const nodes = slot.assignedElements();
+    const img = nodes.find((el) => el.tagName === 'IMG');
+    if (img) {
+      // Wait for the image to load if it's not already loaded
+      if (img.complete) {
+        this.setComputedDimensions(img);
+      } else {
+        img.addEventListener('load', () => this.setComputedDimensions(img), { once: true });
+      }
+    }
+  }
+
+  setComputedDimensions(img) {
+    const rect = img.getBoundingClientRect();
+    this.imageWidth = rect.width;   // Computed width of the container
+    this.imageHeight = rect.height; // Computed height of the container
   }
 
   renderTexts() {
     return this.texts.map((item, index) => {
-      const position = this.getRandomPosition(index, this.texts.length);
+      const p = this.getRandomPosition(index, this.texts.length, this.imageWidth, this.imageHeight);
+      const r = this.getRandomRotation()
       return html`
-        <div
-          class="meme-text"
-          style="
-            top: ${position.top};
-            left: ${position.left};
-            color: ${item.color};
-            transform: translate(-50%, -50%) rotate(${this.getRandomRotation()}deg);
-          "
-        >
+        <doge-text x="${p.left}" y="${p.top}" r="${this.getRandomRotation()}" c="${item.color}">
           ${item.text}
-        </div>
+        </doge-text>
       `;
     });
   }
@@ -164,11 +194,11 @@ export class DogeYay extends LitElement {
   render() {
     return html`
       <div class="meme-container">
-        <slot></slot>
+        <slot @slotchange="${this.updateImageDimensions}"></slot>
         ${
           this.useSlotted
             ? html`<slot name="baked"></slot>` // Render slotted <doge-text> elements
-            : this.renderTexts() // Render generated meme texts
+            : html`<div class="baked">${this.renderTexts()}</div>` // Render generated meme texts
         }
       </div>
     `;

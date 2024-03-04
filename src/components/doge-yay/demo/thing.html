@@ -1,0 +1,62 @@
+<div class="board">
+  <drag-box color="red"></drag-box>
+  <drag-box color="yellow"></drag-box>
+  <drag-box color="blue"></drag-box>
+</div>
+
+<script>
+  console.clear();
+  customElements.define('drag-box', class extends HTMLElement {
+    constructor() {
+      super()
+        .attachShadow({mode:'open'})
+        .innerHTML = `<style>
+                        :host {
+                          display: inline-block;
+                          width: 100px;
+                          height: 100px;
+                          cursor: grab;
+                          background: var(--color)
+                        }
+                      </style>`;
+      this.updatedragover = true;
+    }
+    connectedCallback() {
+      this.color = this.color;
+      this.setAttribute("draggable", true);
+      // let JS default "handleEvent" on the class handle the event
+      this.addEventListener('dragstart', this);
+      this.addEventListener('dragend', this);
+      this.addEventListener('dragover', this);
+    }
+    handleEvent(e) {
+      if (this[e.type]) this[e.type](e); // exec method
+    }
+    dragover(e) {
+      if (this.updatedragover) { // only once a second
+        this.updatedragover = false;
+        let dragcolor = this.board.dragging.color;
+        console.log(dragcolor,'dragover', this.color);
+        setTimeout(() => this.updatedragover = true, 1000);
+      }
+    }
+    dragstart(e) {
+      console.log(e.type, this.color);
+      this.style.opacity = 0.3;
+      this.board.dragging = this;
+    }
+    dragend(e) {
+      console.log(e.type, this.color);
+      this.style.opacity = 1;
+    }
+    get color() {
+      return this.getAttribute("color") || "grey"
+    }
+    set color(c) {
+      this.style.setProperty("--color", c);
+    }
+    get board(){
+        return this.closest(".board");
+    }
+  })
+</script>

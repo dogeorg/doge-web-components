@@ -16,7 +16,6 @@ export class DogeText extends LitElement {
       white-space: nowrap;
       user-select: none;
       font-size: 2em;
-      /* additional styles for text, like font settings, can be added here */
     }
   `;
 
@@ -26,6 +25,54 @@ export class DogeText extends LitElement {
     this.y = 0;
     this.r = 0;
     this.c = "black";
+
+    // Bind functions to this
+    this.onMouseMove = this.onMouseMove.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('mousedown', this.dragstart);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('mousedown', this.dragstart);
+    // Clean up mousemove and mouseup just in case the element is removed while dragging
+    this.removeDraggingEventListeners();
+  }
+
+  dragstart(e) {
+    // Prevent default dragging of selected content
+    e.preventDefault();
+
+    // Set the initial offset position
+    this.initialX = e.clientX - this.x;
+    this.initialY = e.clientY - this.y;
+
+    // Attach the listeners for mousemove and mouseup
+    document.addEventListener('mousemove', this.onMouseMove);
+    document.addEventListener('mouseup', this.onMouseUp);
+  }
+
+  onMouseMove(event) {
+    // Calculate the new position
+    this.x = event.clientX - this.initialX;
+    this.y = event.clientY - this.initialY;
+
+    // Request an update to re-render the component with new positions
+    this.requestUpdate();
+  }
+
+  onMouseUp(event) {
+    // Stop the dragging process
+    this.removeDraggingEventListeners();
+  }
+
+  removeDraggingEventListeners() {
+    document.removeEventListener('mousemove', this.onMouseMove);
+    document.removeEventListener('mouseup', this.onMouseUp);
   }
 
   render() {
@@ -40,7 +87,6 @@ export class DogeText extends LitElement {
     return html`
       <div style="${styleMap(styles)}">
         <slot></slot>
-        <!-- This will project the content inside <doge-text> -->
       </div>
     `;
   }
