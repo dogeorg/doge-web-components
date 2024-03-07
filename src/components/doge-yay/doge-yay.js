@@ -1,4 +1,4 @@
-import { LitElement, css, html } from "../../lib/doge-init.js";
+import { LitElement, css, html, dogeComponentInit } from "../../lib/doge-init.js";
 import "../doge-text.js";
 
 export class DogeYay extends LitElement {
@@ -70,6 +70,7 @@ export class DogeYay extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    dogeComponentInit();
     this.addEventListener("dblclick", this.handleDoubleClick);
   }
 
@@ -81,8 +82,10 @@ export class DogeYay extends LitElement {
   handleDoubleClick = (event) => {
     // Ensure the double-click is on the meme-container, not just on a meme-text
     let serializedStates = "";
-    const memeTexts = this.shadowRoot.querySelector(".baked");
-    serializedStates = `<div slot="baked">${memeTexts.innerHTML}</div>`;
+    const memeContainerInnerHTML = this.shadowRoot.querySelector(".baked").innerHTML;
+    const scrubbedMemeContainerInnerHTML = memeContainerInnerHTML
+      .replace(/<!--.*?-->/gs, '').trim() // remove HTML comments
+    serializedStates = `<div slot="baked">${scrubbedMemeContainerInnerHTML}</div>`;
 
     // Copy all serialized states to clipboard
     navigator.clipboard
@@ -183,11 +186,7 @@ export class DogeYay extends LitElement {
     return this.texts.map((item, index) => {
       const p = this.getRandomPosition(index, this.texts.length, this.imageWidth, this.imageHeight);
       const r = this.getRandomRotation()
-      return html`
-        <doge-text x="${p.left}" y="${p.top}" r="${this.getRandomRotation()}" c="${item.color}">
-          ${item.text}
-        </doge-text>
-      `;
+      return html`<doge-text x="${p.left}" y="${p.top}" r="${this.getRandomRotation()}" c="${item.color}">${item.text}</doge-text>`;
     });
   }
 

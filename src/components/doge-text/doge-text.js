@@ -1,4 +1,4 @@
-import { LitElement, css, html, styleMap } from "../../lib/doge-init.js";
+import { LitElement, css, html, styleMap, dogeComponentInit } from "../../lib/doge-init.js";
 
 export class DogeText extends LitElement {
   static properties = {
@@ -33,6 +33,7 @@ export class DogeText extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    dogeComponentInit();
     this.addEventListener('mousedown', this.dragstart);
   }
 
