@@ -1,0 +1,6 @@
+doge-qr:not(:defined) {
+    display: inline-block;
+    width: 220px;
+    height: 220px;
+    opacity: 0;
+}
