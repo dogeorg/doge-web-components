@@ -4,22 +4,22 @@
 rm -rf dist
 mkdir -p dist
 
-# Find all JavaScript files within src/components directory
-JS_FILES=$(find src/components -type f -name "doge-*.js")
-CSS_FILES=$(find src/components -type f -name "*initial.css")
+# Copy all folders and subfolders within src/components to dist, excluding test files
+rsync -av --exclude='*test.html' --exclude='*test.js' src/components/ dist/
 
-# For each JS file, copy it to the root for convenient
+# For each component, create a file within the root for ease of
 # consumption from fetch.dogecoin.org/<component>.js
-for file in $JS_FILES
-do
-   filename=$(basename "$file")
-   echo "JS File: $filename"
-   cp "$file" "dist/$filename"
+for dir in src/components/*; do
+  if [ -d "$dir" ]; then
+      component_name=$(basename "$dir")
+      echo "export * from \"./${component_name}/${component_name}.js\"" > "dist/${component_name}.js"
+  fi
 done
 
 # For each css file, concatinate and create a single file
 # for component consumers to include within the <head>
 # of their webpage, to reduce flash of unstyled content.
+CSS_FILES=$(find src/components -type f -name "*initial.css")
 for file in $CSS_FILES
 do
    echo "CSS File: $file"
