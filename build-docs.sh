@@ -26,7 +26,7 @@ do
 <html>
   <head>
     <script type="text/javascript">
-    if (!window.location.pathname.endsWith('/')) {
+    if (!window.location.pathname.endsWith('/demo/')) {
       window.location.href = window.location.pathname + '/demo/';
     }
     </script>
