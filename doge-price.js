@@ -30,17 +30,14 @@ export class DogePrice extends LitElement {
     try {
       const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=${this.currency}`);
       const data = await response.json();
-      const price = data.dogecoin[this.currency];
-      this.price = price;
+      this.price = data.dogecoin[this.currency]
     } catch (error) {
       console.error('Error fetching Dogecoin price:', error);
     }
   }
 
   render() {
-    return html`
-      <span>${this.price} ${this.currency.toUpperCase()}</span>
-    `;
+    return html`<span class="value">${this.price}<span class="gap"> </span><span class="currency">${this.currency.toUpperCase()}</span>`;
   }
 }
 
