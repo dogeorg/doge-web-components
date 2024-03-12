@@ -56,7 +56,7 @@
           for (const component in components) {
             const li = document.createElement('li');
             const anchor = document.createElement('a');
-            anchor.href = component;
+            anchor.href = `${component}/demo/`;
             anchor.innerText = component;
             li.appendChild(anchor);
             ul.appendChild(li);
