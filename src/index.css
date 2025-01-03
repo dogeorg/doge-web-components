@@ -6,7 +6,7 @@ h1, h2, h3, h4, h5 {
   font-family: var(--doge-font-fancy);
 }
 .page {
-  width: 600px;
+  max-width: 600px;
   margin: 0px 0px;
   padding: 20px;
 }

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../../resources/img/favicon.ico" type="image/x-icon">
+    <title>Doge Web Components | doge-donate</title>
+
+    <link rel="stylesheet" href="../../../index.css" />
+    <link rel="stylesheet" href="demo.css" />
+    <link rel="stylesheet" href="../../../../resources/blocks/prism/prism.css" />
+    <script type="text/javascript" src="../../../../resources/blocks/prism/prism.js"></script>
+
+    <link rel="stylesheet" href="../../../../resources/css/doge-components.css" />
+    <link rel="stylesheet" href="../initial.css" />
+    <script type="module" src="../doge-donate.js"></script>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <a href="/">← Back</a>
+        <h1><span class="sans">&lt;doge-donate&gt; </span><span class="soft comic">web component</span></h1>
+      </header>
+
+      <section>
+        <h2>Purpose</h2>
+        <hr />
+        <p>
+          A donation widget that combines preset amounts with a QR code for easy Dogecoin donations.
+        </p>
+
+        <div class="container">
+          <div class="box">
+            <doge-donate
+              address="D89DhnsgKncmN12RejxudfU8AwXp3946q1"
+              presets="69, 100, 300, 1200"
+              selectedAmount="300"
+              theme="such-doge"
+            </doge-donate>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Usage</h2>
+        <hr />
+        <p>
+          1. Add the script to your webpage.
+        </p>
+
+        <pre><code class="language-markup">
+          &lt;script
+            type="module"
+            src="https://fetch.dogecoin.org/doge-donate.js"&gt;
+          &lt;/script&gt;
+          </code></pre>
+
+        <p>
+          2. Place the doge-donate element on your page.
+        </p>
+        <div id="CodeContainer">
+          <script type="text/plain" class="language-html">
+          <doge-donate
+            address="D89DhnsgKncmN12RejxudfU8AwXp3946q1"
+            presets="69, 500, 1337, 9001"
+            selectedAmount="500">
+          </doge-donate>
+          </script>
+        </div>
+
+        <p>
+          3. Test the donation options and QR codes to ensure they generate correct Dogecoin URIs.
+        </p>
+      </section>
+
+      <section>
+        <h2>Properties</h2>
+        <hr />
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">address</code></td>
+            <td>Your Dogecoin receiving address</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">presets</code></td>
+            <td>The donation options presented as buttons</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">selectedAmount</code></td>
+            <td>The initially selected value</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">theme</code></td>
+            <td>The theme for the QR code (inherits from doge-qr themes)</td>
+          </tr>
+        </table>
+      </section>
+
+            <section>
+        <h2>Styling</h2>
+        <hr />
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">size</code></td>
+            <td>Select a size <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code></td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">theme</code></td>
+            <td>Select a predefined theme:
+              <br><code>such-doge</code>,
+              <br><code>so-coin</code>,<br>
+              <code>much-dev</code>,<br>
+              <code>very-community</code><br>
+              <span class="note">When used, the theme determines the background and fill color(s).</span>
+            </td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">tint</code></td>
+            <td>Overrides the color of the preset options eg: <code>#CCC</code>, <code>red</code></td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">background</code></td>
+            <td>The background color. This can be any valid CSS color</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">fill</code></td>
+            <td>
+              The QR dots color. This can be any valid CSS color.<br/>
+              Provide two colors for a simple gradient<br/>
+              <code>yellow</code><br/>
+              <code>#ffc107</code><br/>
+              <code>"#ffc107, blue"</code>
+            </td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">img</code></td>
+            <td>Set a custom image by providing a URL. This can be a <code>png</code>, <code>jpg</code> or <code>gif</code>.</td>
+          </tr>
+          
+        </table>
+      </section>
+
+      <section>
+        <h2>Examples</h2>
+        <hr />
+
+        <h3>Classic Theme</h3>
+        <script type="text/plain" class="language-html">
+        <doge-donate
+          address="D89DhnsgKncmN12RejxudfU8AwXp3946q1"
+          theme="so-coin">
+        </doge-donate>
+        </script>
+
+        <doge-donate
+          address="D89DhnsgKncmN12RejxudfU8AwXp3946q1"
+          theme="so-coin">
+        </doge-donate>
+
+        <h3>Developer Theme</h3>
+        <script type="text/plain" class="language-html">
+        <doge-donate
+          address="D89DhnsgKncmN12RejxudfU8AwXp3946q1"
+          theme="much-dev">
+        </doge-donate>
+        </script>
+
+        <doge-donate
+          address="D89DhnsgKncmN12RejxudfU8AwXp3946q1"
+          theme="much-dev">
+        </doge-donate>
+
+        <h3>Community Theme</h3>
+        <script type="text/plain" class="language-html">
+        <doge-donate
+          address="D89DhnsgKncmN12RejxudfU8AwXp3946q1"
+          theme="very-community">
+        </doge-donate>
+        </script>
+
+        <doge-donate
+          address="D89DhnsgKncmN12RejxudfU8AwXp3946q1"
+          theme="very-community">
+        </doge-donate>
+
+        <h3>Custom Styling</h3>
+        <script type="text/plain" class="language-html">
+        <doge-donate
+          address="D89DhnsgKncmN12RejxudfU8AwXp3946q1"
+          presets="10, 69"
+          tint="#ddd"
+          fill="#bbb, #ccc"
+          img="dance.gif"
+          >
+        </doge-donate>
+        </script>
+
+        <doge-donate
+          address="D89DhnsgKncmN12RejxudfU8AwXp3946q1"
+          presets="10, 69"
+          tint="#ddd"
+          fill="#bbb, #ccc"
+          img="dance.gif"
+          >
+        </doge-donate>
+      </section>
+
+    </div>
+  </body>
+</html>
