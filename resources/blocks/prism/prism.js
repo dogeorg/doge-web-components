@@ -8,10 +8,12 @@ Prism.languages.javascript=Prism.languages.extend("clike",{"class-name":[Prism.l
 "undefined"!=typeof Prism&&"undefined"!=typeof document&&(Element.prototype.matches||(Element.prototype.matches=Element.prototype.msMatchesSelector||Element.prototype.webkitMatchesSelector),Prism.plugins.UnescapedMarkup=!0,Prism.hooks.add("before-highlightall",(function(e){e.selector+=', [class*="lang-"] script[type="text/plain"], [class*="language-"] script[type="text/plain"], script[type="text/plain"][class*="lang-"], script[type="text/plain"][class*="language-"]'})),Prism.hooks.add("before-sanity-check",(function(e){var t=e.element;if(t.matches('script[type="text/plain"]')){var a=document.createElement("code"),c=document.createElement("pre");c.className=a.className=t.className;var n=t.dataset;return Object.keys(n||{}).forEach((function(e){Object.prototype.hasOwnProperty.call(n,e)&&(c.dataset[e]=n[e])})),a.textContent=e.code=e.code.replace(/&lt;\/script(?:>|&gt;)/gi,"<\/script>"),c.appendChild(a),t.parentNode.replaceChild(c,t),void(e.element=a)}if(!e.code){var o=t.childNodes;1===o.length&&"#comment"==o[0].nodeName&&(t.textContent=e.code=o[0].textContent)}})));
 !function(){if("undefined"!=typeof Prism&&"undefined"!=typeof document){var e=[],t={},n=function(){};Prism.plugins.toolbar={};var a=Prism.plugins.toolbar.registerButton=function(n,a){var r;r="function"==typeof a?a:function(e){var t;return"function"==typeof a.onClick?((t=document.createElement("button")).type="button",t.addEventListener("click",(function(){a.onClick.call(this,e)}))):"string"==typeof a.url?(t=document.createElement("a")).href=a.url:t=document.createElement("span"),a.className&&t.classList.add(a.className),t.textContent=a.text,t},n in t?console.warn('There is a button with the key "'+n+'" registered already.'):e.push(t[n]=r)},r=Prism.plugins.toolbar.hook=function(a){var r=a.element.parentNode;if(r&&/pre/i.test(r.nodeName)&&!r.parentNode.classList.contains("code-toolbar")){var o=document.createElement("div");o.classList.add("code-toolbar"),r.parentNode.insertBefore(o,r),o.appendChild(r);var i=document.createElement("div");i.classList.add("toolbar");var l=e,d=function(e){for(;e;){var t=e.getAttribute("data-toolbar-order");if(null!=t)return(t=t.trim()).length?t.split(/\s*,\s*/g):[];e=e.parentElement}}(a.element);d&&(l=d.map((function(e){return t[e]||n}))),l.forEach((function(e){var t=e(a);if(t){var n=document.createElement("div");n.classList.add("toolbar-item"),n.appendChild(t),i.appendChild(n)}})),o.appendChild(i)}};a("label",(function(e){var t=e.element.parentNode;if(t&&/pre/i.test(t.nodeName)&&t.hasAttribute("data-label")){var n,a,r=t.getAttribute("data-label");try{a=document.querySelector("template#"+r)}catch(e){}return a?n=a.content:(t.hasAttribute("data-url")?(n=document.createElement("a")).href=t.getAttribute("data-url"):n=document.createElement("span"),n.textContent=r),n}})),Prism.hooks.add("complete",r)}}();
 
+const avoidList = ['img', 'br', 'hr'];
+
 Prism.hooks.add("before-highlight", function (env) {
-  // Formatter that splits attributes on to new lines.
+  const avoidPattern = `(?<!<(?:${avoidList.join('|')})[^>]*?)`;
   env.code = env.element.innerText
-    .trim() // remove any initial whitespace
-    .replace(/(?<!,)\s+/g, "\n  ") // create indents.
-    .replace(/>\s+(?=<\/)/g, ">\n"); // close tag.
-})
+    .trim()
+    .replace(new RegExp(`${avoidPattern}(?<!,)\\s+`, 'g'), "\n  ")
+    .replace(/>\s+(?=<\/)/g, ">\n");
+});
