@@ -96,3 +96,7 @@ footer {
   transform: rotateZ(-15deg) translateY(5px);
   margin-right: 10px;
 }
+
+.components-list {
+  line-height: 1.3rem;
+}

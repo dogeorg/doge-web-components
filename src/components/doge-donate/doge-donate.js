@@ -6,17 +6,19 @@ import { DogeQR } from "../doge-qr/doge-qr.js"
 
 export class DogeDonate extends LitElement {
   static properties = {
-    address: {},
+    address: { type: String },
     tint: { type: String },
     theme: { type: String },
     selectedAmount: { type: Number },
     customAmount: { type: Number },
     isCustomAmount: { type: Boolean },
+    listLabel: { type: String },
+    qrLabel: { type: String },
     presets: { 
       type: Array,
       converter: {
         fromAttribute: (value) => {
-          if (!value) return [69, 500, 1337, 9001]; // default values
+          if (!value) return [69, 500, 1337, 9001];
           return value.split(',')
             .map(num => parseInt(num.trim()))
             .filter(num => !isNaN(num) && num > 0);
@@ -24,7 +26,6 @@ export class DogeDonate extends LitElement {
         toAttribute: (value) => value.join(', ')
       }
     },
-    // DogeQR specific properties
     size: { type: String },
     background: {},
     fill: {},
@@ -43,13 +44,46 @@ export class DogeDonate extends LitElement {
       max-width: 800px;
       margin: 0 auto;
       padding: 1rem;
-      align-items: center;
     }
 
-    .options {
+    .section {
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      text-align: center;
+    }
+
+    .section-content {
+      display: flex;
+      flex-direction: column;
+      gap: .77rem;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .options {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .qr-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .qr-section .section-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .label {
+      font-weight: bold;
+      font-family: 'Comic Neue';
+      font-size: 1.1rem;
     }
 
     .amount-btn {
@@ -101,16 +135,28 @@ export class DogeDonate extends LitElement {
       color: black;
     }
 
-    .qr-section {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
-
     @media (max-width: 600px) {
       .container {
         grid-template-columns: 1fr;
       }
+
+      .section.qr {
+        gap: 0em;
+      }
+    }
+
+    slot[name="label-list"],
+    slot[name="label-qr"] {
+      text-align: center;
+      width: auto;
+      margin: 0 auto;
+      display: block;
+      max-width: fit-content;
+    }
+
+    ::slotted(img) {
+      width: auto;
+      height: auto;
     }
   `;
 
@@ -120,10 +166,9 @@ export class DogeDonate extends LitElement {
     this.customAmount = null;
     this.isCustomAmount = false;
     this.presets = [69, 500, 1337, 9001];
-
+    this.listLabel = ""
+    this.qrLabel = ""
     this.tint = null;
-
-    // Set default values for QR properties
     this.size = 'md';
     this.background = null;
     this.fill = null;
@@ -131,11 +176,9 @@ export class DogeDonate extends LitElement {
   }
 
   getTintColor() {
-    // If user provided tint, use it
     if (this.tint) {
       return this.tint;
     }
-    // Otherwise get from theme
     const QR = this.shadowRoot.querySelector('doge-qr');
 
     if (!QR) return;
@@ -143,7 +186,6 @@ export class DogeDonate extends LitElement {
     if (this.theme) {
       return QR.getThemeColors(this.theme).secondary;
     }
-    // Fallback
     return QR.getThemeColors().primary;
   }
 
@@ -152,7 +194,6 @@ export class DogeDonate extends LitElement {
     this.customAmount = null;
     this.isCustomAmount = false;
     
-    // Clear the input value
     const input = this.shadowRoot.querySelector('.custom-amount input');
     if (input) {
       input.value = '';
@@ -170,8 +211,6 @@ export class DogeDonate extends LitElement {
 
   updated(changedProperties) {
     if (changedProperties.has('theme') || changedProperties.has('tint')) {
-      
-      // Update the CSS custom property when theme or tint changes
       this.style.setProperty('--tint-color', this.getTintColor());
     }
   }
@@ -180,40 +219,48 @@ export class DogeDonate extends LitElement {
     this.style.setProperty('--tint-color', this.getTintColor());
 
     return html`
+      <header slot="header" part="header"></header>
       <div class="container">
-        <div class="options">
-          ${this.presets.map(amount => html`
-            <button 
-              class="amount-btn ${this.selectedAmount === amount && !this.isCustomAmount ? 'selected' : ''}"
-              @click=${() => this.handleOptionClick(amount)}
-            >
-              Ð${amount}
-            </button>
-          `)}
-          <div class="custom-amount">
-            <input
-              min="1"
-              type="number"
-              placeholder="Other"
-              @input=${this.handleCustomAmountInput}
-              .value=${this.customAmount || ''}
-              class=${this.isCustomAmount ? 'has-value' : ''}
-            >
+        <div class="section">
+          <slot name="label-list" class="label" part="label-list">${this.listLabel}</slot>
+          <div class="section-content">
+            ${this.presets.map(amount => html`
+              <button 
+                class="amount-btn ${this.selectedAmount === amount && !this.isCustomAmount ? 'selected' : ''}"
+                @click=${() => this.handleOptionClick(amount)}
+              >
+                Ð${amount}
+              </button>
+            `)}
+            <div class="custom-amount">
+              <input
+                min="1"
+                type="number"
+                placeholder="Other"
+                @input=${this.handleCustomAmountInput}
+                .value=${this.customAmount || ''}
+                class=${this.isCustomAmount ? 'has-value' : ''}
+              >
+            </div>
           </div>
         </div>
         
-        <div class="qr-section">
-          <doge-qr
-            .address=${this.address}
-            .theme=${this.theme}
-            .amount=${this.selectedAmount}
-            .size=${this.size}
-            .background=${this.background}
-            .fill=${this.fill}
-            .img=${this.img}
-          ></doge-qr>
+        <div class="section qr">
+          <slot name="label-qr" class="label" part="label-qr">${this.qrLabel}</slot>
+          <div class="section-content">
+            <doge-qr
+              .address=${this.address}
+              .theme=${this.theme}
+              .amount=${this.selectedAmount}
+              .size=${this.size}
+              .background=${this.background}
+              .fill=${this.fill}
+              .img=${this.img}
+            ></doge-qr>
+          </div>
         </div>
       </div>
+      <footer slot="footer" part="footer"></footer>
     `;
   }
 }

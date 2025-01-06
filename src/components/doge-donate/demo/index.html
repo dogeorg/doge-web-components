@@ -35,6 +35,9 @@
               presets="69, 100, 300, 1200"
               selectedAmount="300"
               theme="such-doge"
+              listLabel="(1) Select Amount"
+              qrLabel="(2) Scan to pay"
+              >
             </doge-donate>
           </div>
         </div>
@@ -92,10 +95,18 @@
             <td><code class="nowrap">selectedAmount</code></td>
             <td>The initially selected value</td>
           </tr>
+          <tr>
+            <td><code class="nowrap">listLabel</code></td>
+            <td>Text label placed above the presets</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">qrLabel</code></td>
+            <td>Text label placed above the QR code</td>
+          </tr>
         </table>
       </section>
 
-            <section>
+      <section>
         <h2>Styling</h2>
         <hr />
         <table class="props-list">
@@ -140,6 +151,25 @@
             <td>Set a custom image by providing a URL. This can be a <code>png</code>, <code>jpg</code> or <code>gif</code>.</td>
           </tr>
           
+        </table>
+      </section>
+
+      <section>
+        <h2>Slots</h2>
+        <hr />
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">label-list</code></td>
+            <td>Provided content will be rendered above the list of presets</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">label-qr</code></td>
+            <td>Provided content will be rendered above the QR code</td>
+          </tr>
         </table>
       </section>
 
@@ -193,18 +223,21 @@
           presets="10, 69"
           tint="#ddd"
           fill="#bbb, #ccc"
-          img="dance.gif"
-          >
+          img="dance.gif">
+          <img slot="label-list" src="./select.png" />
+          <img slot="label-qr" src="./scan.png" />
         </doge-donate>
         </script>
 
         <doge-donate
           address="D89DhnsgKncmN12RejxudfU8AwXp3946q1"
-          presets="10, 69"
+          presets="10, 69, 200, 3000, 4567"
           tint="#ddd"
           fill="#bbb, #ccc"
-          img="dance.gif"
-          >
+          img="dance.gif">
+          
+          <img slot="label-list" src="./select.png" />
+          <img slot="label-qr" src="./scan.png" />
         </doge-donate>
       </section>
 
