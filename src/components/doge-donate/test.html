@@ -1,0 +1,95 @@
+<html>
+  <body>
+    <script type="module">
+      import { html, fixture, expect } from "@open-wc/testing";
+      import { runTests } from "@web/test-runner-mocha";
+      import "./doge-donate.js";
+
+      runTests(async () => {
+        describe("DogeDonate", () => {
+          it('renders preset donation amounts correctly', async () => {
+            const el = await fixture(html`
+              <doge-donate address="D89..." theme="such-doge"></doge-donate>
+            `);
+            const buttons = el.shadowRoot.querySelectorAll('.amount-btn');
+            expect(buttons.length).to.equal(4); // Default presets: 69, 500, 1337, 9001
+            expect(buttons[0].textContent.trim()).to.equal('Ð69');
+            expect(buttons[1].textContent.trim()).to.equal('Ð500');
+            expect(buttons[2].textContent.trim()).to.equal('Ð1337');
+            expect(buttons[3].textContent.trim()).to.equal('Ð9001');
+          });
+
+          it('accepts custom presets via attribute', async () => {
+            const el = await fixture(html`
+              <doge-donate address="D89..." presets="100, 200, 300" theme="such-doge"></doge-donate>
+            `);
+            const buttons = el.shadowRoot.querySelectorAll('.amount-btn');
+            expect(buttons.length).to.equal(3);
+            expect(buttons[0].textContent.trim()).to.equal('Ð100');
+            expect(buttons[1].textContent.trim()).to.equal('Ð200');
+            expect(buttons[2].textContent.trim()).to.equal('Ð300');
+          });
+
+          it('uses theme colors for tint when no custom tint provided', async () => {
+            const el = await fixture(html`
+              <doge-donate address="D89..." theme="very-community" theme="such-doge"></doge-donate>
+            `);
+            await el.updateComplete;
+            const computedStyle = window.getComputedStyle(el);
+            const tintColor = computedStyle.getPropertyValue('--tint-color').trim();
+            expect(tintColor).to.not.equal('#ffc107'); // Should not be default color
+          });
+
+          it('custom tint overrides theme colors', async () => {
+            const customTint = '#ff0000';
+            const el = await fixture(html`
+              <doge-donate 
+                address="D89..." 
+                theme="very-community"
+                tint="${customTint}"
+              ></doge-donate>
+            `);
+            await el.updateComplete;
+            const computedStyle = window.getComputedStyle(el);
+            const tintColor = computedStyle.getPropertyValue('--tint-color').trim();
+            expect(tintColor).to.equal(customTint);
+          });
+
+          it('handles custom amount input', async () => {
+            const el = await fixture(html`
+              <doge-donate address="D89..." theme="such-doge"></doge-donate>
+            `);
+            const input = el.shadowRoot.querySelector('input');
+            input.value = '420';
+            input.dispatchEvent(new Event('input'));
+            
+            expect(el.selectedAmount).to.equal(420);
+            expect(el.isCustomAmount).to.be.true;
+          });
+
+          it('switches back to preset amount when clicked after custom amount', async () => {
+            const el = await fixture(html`
+              <doge-donate address="D89..." theme="such-doge"></doge-donate>
+            `);
+            
+            // First set custom amount
+            const input = el.shadowRoot.querySelector('input');
+            input.value = '420';
+            input.dispatchEvent(new Event('input'));
+            
+            // Then click preset button
+            const buttons = el.shadowRoot.querySelectorAll('.amount-btn');
+            buttons[0].click(); // Click first preset (69)
+            
+            expect(el.selectedAmount).to.equal(69);
+            expect(el.isCustomAmount).to.be.false;
+            expect(el.customAmount).to.be.null;
+            
+            // Check that input is cleared
+            expect(input.value).to.equal('');
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

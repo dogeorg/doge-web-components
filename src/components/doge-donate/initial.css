@@ -1,0 +1,14 @@
+doge-donate:not(:defined) {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: 220px;
+  margin: 0 auto;
+  opacity: 0;
+}
+
+@media (max-width: 600px) {
+  doge-donate:not(:defined) {
+    height: 440px;
+  }
+}

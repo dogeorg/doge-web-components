@@ -56,6 +56,24 @@ export class DogeQR extends LitElement {
     this.qrCanvas;
 	}
 
+  getThemeColors(theme = null) {
+    // Expose a method that returns the current themes colors in order for
+    // external components to style themselves fittingly.
+    if (this.theme && DogeQR.themes[this.theme]) {
+      const themeColors = DogeQR.themes[this.theme].fill.split(',').map(c => c.trim());
+      return {
+        primary: themeColors[0],
+        secondary: themeColors[1] || themeColors[0]
+      };
+    }
+
+    // Default to such-doge theme
+    return {
+      primary: "#de9a1e",
+      secondary: "#ffc107"
+    };
+  }
+
   generateColorStops(colors = "") {
     const colorArray = colors.split(',').map(c => c.trim());
     return colorArray.map((c, index) => ({
@@ -114,14 +132,22 @@ export class DogeQR extends LitElement {
     return `?amount=${this.amount}`
   }
 
-	firstUpdated() {
-		this.qrCanvas = this.renderRoot.querySelector('#qrCanvas');
- 		try {
-			const qrCode = new QRCodeStyling({
-				width: DogeQR.sizes[this.size],
-				height: DogeQR.sizes[this.size],
-				type: "svg",
-				data: this.generateQrValue(),
+  generateQRCode() {
+    if (!this.qrCanvas) {
+      this.qrCanvas = this.renderRoot.querySelector('#qrCanvas');
+    }
+
+    // Clear existing QR code
+    if (this.qrCanvas.firstChild) {
+      this.qrCanvas.firstChild.remove();
+    }
+
+    try {
+      const qrCode = new QRCodeStyling({
+        width: DogeQR.sizes[this.size],
+        height: DogeQR.sizes[this.size],
+        type: "svg",
+        data: this.generateQrValue(),
         imageOptions: {
           crossOrigin: "anonymous",
           hideBackgroundDots: false,
@@ -129,18 +155,33 @@ export class DogeQR extends LitElement {
           margin: 0
         },
         ...this.applyTheme(),
-			});
+      });
 
-			qrCode.append(this.qrCanvas);
+      qrCode.append(this.qrCanvas);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
-		} catch (err) {
-			console.error(err);
-		}
-	}
+  firstUpdated() {
+    this.generateQRCode();
+  }
 
 	connectedCallback() {
 		super.connectedCallback();
 	}
+
+  updated(changedProperties) {
+    if (changedProperties.has('address') ||
+        changedProperties.has('amount') ||
+        changedProperties.has('theme') ||
+        changedProperties.has('size') ||
+        changedProperties.has('background') ||
+        changedProperties.has('fill') ||
+        changedProperties.has('img')) {
+      this.generateQRCode();
+    }
+  }
 
 	render() {
 		return html`
