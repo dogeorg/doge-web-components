@@ -1,0 +1,68 @@
+span.note {
+  display: block;
+  font-size: 1rem;
+  margin: 0.5em 0;
+}
+
+.container {
+  margin: 0px auto;
+  max-width: 800px;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 40px;
+  padding: 20px;
+}
+
+.box {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.box span {
+  padding: 10px;
+  margin-top: 15px;
+  font-weight: 500;
+  color: #666;
+}
+
+/* Theme showcase section */
+.theme-examples {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.theme-example {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+/* Code container styles */
+#CodeContainer .code-toolbar {
+  display: none;
+}
+
+#CodeContainer .code-toolbar:first-child {
+  display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+  .container {
+    padding: 10px;
+    grid-template-columns: 1fr;
+  }
+
+  .box {
+    margin: 10px 0;
+  }
+}

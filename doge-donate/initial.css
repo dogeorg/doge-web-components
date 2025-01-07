@@ -12,15 +12,3 @@ doge-donate:not(:defined) {
     height: 440px;
   }
 }
-doge-qr:not(:defined) {
-    display: inline-block;
-    width: 220px;
-    height: 220px;
-    opacity: 0;
-}
-doge-nav:not(:defined) {
-    display: block;
-    height: 62px;
-    overflow: hidden;
-    opacity: 0;
-}
