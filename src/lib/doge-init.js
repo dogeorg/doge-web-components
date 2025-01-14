@@ -1,4 +1,4 @@
-// import { setBasePath } from '../../resources/blocks/shoelace@2.12.0/utilities/base-path.js';
+import { setBasePath } from './shoelace/cdn@2.14.0/utilities/base-path.js';
 import { LitElement, css, html, classMap } from "./lit/dist@3/lit-local.js";
 
 export const resourceBasePath = "https://fetch.dogecoin.org/resources"
@@ -15,7 +15,7 @@ export function dogeComponentInit() {
 	addStylesheetsIfNotPresent(stylesheetPaths);
 
 	// Ensures components utilising elements from shoelace have an accurate shoelace basepath set.
-	// setBasePath('https://fetch.dogecoin.org/resources/blocks/shoelace@2.12.0');
+	setBasePath('./lib/shoelace/cdn@2.14.0');
 }
 
 let stylesheetPaths = [

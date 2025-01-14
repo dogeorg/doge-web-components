@@ -1,0 +1,4 @@
+.special {
+  width: calc(100vw - 13px);
+  margin: 0 -30px;
+}
