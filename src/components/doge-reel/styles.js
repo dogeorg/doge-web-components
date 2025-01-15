@@ -13,7 +13,7 @@ export const styles = css`
         gap: 0;
     }
 
-    sl-carousel::part(base) .--is-active {
-        border: 1px solid red;
+    sl-carousel sl-carousel-item.--is-active {
+        --aspect-ratio: 9/16;
     }
 `

@@ -30,7 +30,15 @@ export class DogeReel extends LitElement {
   render() {
     return html`
       <div>
-        <sl-carousel slides-per-page="3" slides-per-move="1" loop autoplay mouse-dragging autoplayInterval="500" class="scroll-hinted">
+        <sl-carousel
+          autoplay
+          autoplayInterval="500"
+          class="scroll-hinted"
+          loop
+          mouse-dragging
+          slides-per-page="3"
+          slides-per-move="1"
+        >
           <sl-carousel-item style="background: var(--sl-color-red-200);">Slide 1</sl-carousel-item>
           <sl-carousel-item style="background: var(--sl-color-orange-200);">Slide 2</sl-carousel-item>
           <sl-carousel-item style="background: var(--sl-color-yellow-200);">Slide 3</sl-carousel-item>
