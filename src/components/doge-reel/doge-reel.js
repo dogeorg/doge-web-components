@@ -18,9 +18,41 @@ export class DogeReel extends LitElement {
     linkElem.rel = 'stylesheet';
     linkElem.href = window.location.origin + '/lib/shoelace/cdn@2.14.0/themes/light.css';
     document.head.appendChild(linkElem);
-    
+
     // Add theme class to host
     this.classList.add('sl-theme-light');
+
+    // Initialize slidesPerPage
+    this.slidesPerPage = this.calculateSlidesPerPage();
+
+    // Bind the method to this instance
+    this.handleResize = this.handleResize.bind(this);
+  }
+
+  calculateSlidesPerPage() {
+    const width = window.innerWidth;
+    if (width >= 1400) return 4;
+    if (width >= 1000) return 3;
+    if (width >= 800) return 2;
+    return 1;
+  }
+
+  handleResize() {
+    const newSlidesPerPage = this.calculateSlidesPerPage();
+    if (this.slidesPerPage !== newSlidesPerPage) {
+      this.slidesPerPage = newSlidesPerPage;
+      this.requestUpdate();
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('resize', this.handleResize);
   }
 
   firstUpdated() {
@@ -32,14 +64,14 @@ export class DogeReel extends LitElement {
       <div>
         <sl-carousel
           autoplay
-          autoplayInterval="500"
+          autoplay-interval=2500
           class="scroll-hinted"
           loop
           mouse-dragging
-          slides-per-page="3"
+          slides-per-page="${this.slidesPerPage}"
           slides-per-move="1"
         >
-          <sl-carousel-item style="background: var(--sl-color-red-200);">Slide 1</sl-carousel-item>
+          <sl-carousel-item data-initial-slide style="background: var(--sl-color-red-200);">Slide 1</sl-carousel-item>
           <sl-carousel-item style="background: var(--sl-color-orange-200);">Slide 2</sl-carousel-item>
           <sl-carousel-item style="background: var(--sl-color-yellow-200);">Slide 3</sl-carousel-item>
           <sl-carousel-item style="background: var(--sl-color-green-200);">Slide 4</sl-carousel-item>

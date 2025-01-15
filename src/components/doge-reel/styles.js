@@ -13,7 +13,9 @@ export const styles = css`
         gap: 0;
     }
 
-    sl-carousel sl-carousel-item.--is-active {
+
+    sl-carousel sl-carousel-item.--is-active,
+    sl-carousel sl-carousel-item[data-initial-slide].--in-view:not([data-clone]) {
         --aspect-ratio: 9/16;
     }
 `
