@@ -19,3 +19,22 @@ Within your HTML file, add a doge component and start using it.
 ```
 <link rel="stylesheet" href="https://fetch.dogecoin.org/initial.css"
 ```
+
+## Run locally
+
+Ensure you have NodeJS installed and the project dependencies
+```
+npm install
+```
+
+Run a dev server via:
+```
+npm run dev
+```
+
+For convenience, run the following to have 'hot reloading' (your web browser will refresh the page on file change.)
+```
+npm run build:watch
+```
+
+[Visit your site](http://localhost:8080)
