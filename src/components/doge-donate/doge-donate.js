@@ -246,7 +246,7 @@ export class DogeDonate extends LitElement {
         </div>
         
         <div class="section qr">
-          <slot name="label-qr" class="label" part="label-qr">${this.qrLabel}</slot>
+          <h1 name="label-qr" class="label" part="label-qr">${this.qrLabel}</h1>
           <div class="section-content">
             <doge-qr
               .address=${this.address}
