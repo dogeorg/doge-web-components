@@ -85,25 +85,6 @@ export class DogeBark extends LitElement {
     }
   }
 
-  maybeUseVerticalTextAdjustment(){
-    var innerwidth = window.innerWidth
-    if (innerwidth > 700) {
-      return this.verticalTextAdjustment;
-    } else {
-      return "0px"
-    }
-    
-  }
-  
-  maybeUsehorizontalTextAdjustment(){
-    var innerwidth = window.innerWidth
-    if (innerwidth > 700) {
-      return this.horizontalTextAdjustment;
-    } else {
-      return "0px"
-    }
-  }
-
 	render() {
 		return html`
 			<div class="body">
@@ -117,9 +98,9 @@ export class DogeBark extends LitElement {
 
 
         <div class="textwrap" style="
-          margin-top: ${this.maybeUseVerticalTextAdjustment()};
-          margin-left: ${this.maybeUsehorizontalTextAdjustment()};
-          ">
+          --desired-margin-top: ${this.verticalTextAdjustment};
+          --desired-margin-left: ${this.horizontalTextAdjustment};
+        ">
           
           ${this.renderTitle()}
 
@@ -148,9 +129,16 @@ export class DogeBark extends LitElement {
       font-style: normal;
     }
 
-    .textwrap{
+    .textwrap {
       margin-top: 0px;
-      
+      margin-left: 0px;
+    }
+
+    @media(min-width:600px) {
+      .textwrap {
+          margin-top: var(--desired-margin-top);
+          margin-left: var(--desired-margin-left);
+      }
     }
 
     .comic-neue-bold {
