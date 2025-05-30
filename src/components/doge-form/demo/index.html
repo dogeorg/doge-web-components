@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../../resources/img/favicon.ico" type="image/x-icon">
+    <title>Doge Web Components | doge-form</title>
+
+    <link rel="stylesheet" href="../../../index.css" />
+    <link rel="stylesheet" href="demo.css" />
+    <link rel="stylesheet" href="../../../../resources/css/doge-components.css" />
+    <link rel="stylesheet" href="../initial.css" />
+    <script type="module" src="../doge-form.js"></script>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <a href="/">← Back</a>
+        <h1><span class="sans">&lt;doge-form&gt; </span><span class="soft comic">web component</span></h1>
+      </header>
+
+      <section>
+        <h2>Purpose</h2>
+        <hr />
+        <p>
+          A flexible form component that collects responses to questions and sends them via email. Perfect for feedback forms, surveys, and contact forms.
+        </p>
+      </section>
+
+      <section>
+        <h2>Examples</h2>
+        <hr />
+
+        <div class="container">
+          <div class="box">
+            <doge-form
+              title="Feedback Form"
+              subtitle="Help us improve our service"
+              question1="What did you like about our service?"
+              question2="What could we improve?"
+              question3="Would you recommend us to others? Why or why not?"
+              emailTo="feedback@example.com"
+              emailSubject="Customer Feedback"
+              width="100%"
+            ></doge-form>
+            <span>Basic Feedback Form</span>
+          </div>
+
+          <div class="box">
+            <doge-form
+              title="Contact Us"
+              subtitle="We'd love to hear from you"
+              question1="What's your name?"
+              question2="What's your email address?"
+              question3="What's your message?"
+              emailTo="contact@example.com"
+              emailSubject="New Contact Form Submission"
+              width="100%"
+              style="--doge-primary-color: #ff9800; --doge-primary-hover-color: #f57c00; --doge-text-color: #ffffff; --doge-text-color-secondary: #cccccc; --doge-border-color: #444444; --form-background: #1a1a1a;"
+            ></doge-form>
+            <span>Custom Themed Contact Form</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Usage</h2>
+        <hr />
+        <p>
+          1. Add the script to your webpage.
+        </p>
+
+        <pre><code class="language-markup">
+          &lt;script
+            type="module"
+            src="https://fetch.dogecoin.org/doge-form.js"&gt;
+          &lt;/script&gt;
+          </code></pre>
+
+        <p>
+          2. Place a doge-form element on your page with your desired configuration.
+        </p>
+        <pre><code class="language-html">
+          &lt;doge-form
+            title="My Form"
+            subtitle="Optional subtitle"
+            question1="First question?"
+            question2="Second question?"
+            question3="Third question?"
+            question4="Fourth question?"
+            question5="Fifth question?"
+            emailTo="recipient@example.com"
+            emailSubject="Form Submission"
+            width="600px"
+          &gt;&lt;/doge-form&gt;
+          </code></pre>
+
+        <p>
+          3. Handle form submissions using the 'doge-form-submit' event (optional).
+        </p>
+        <pre><code class="language-javascript">
+          const form = document.querySelector('doge-form');
+          form.addEventListener('doge-form-submit', (e) => {
+            console.log('Form responses:', e.detail.responses);
+            console.log('Email body:', e.detail.emailBody);
+          });
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>Properties</h2>
+        <hr />
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">title</code></td>
+            <td>Form title displayed at the top</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">subtitle</code></td>
+            <td>Optional subtitle displayed below the title</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">question1</code> to <code class="nowrap">question5</code></td>
+            <td>Up to 5 optional questions to display in the form</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">emailTo</code></td>
+            <td>Email address where the form responses will be sent</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">emailSubject</code></td>
+            <td>Subject line for the email (defaults to "Form Submission")</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">width</code></td>
+            <td>Width of the form (defaults to "100%")</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">height</code></td>
+            <td>Height of the form (defaults to "auto")</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Styling</h2>
+        <hr />
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-primary-color</code></td>
+            <td>Primary color for buttons and interactive elements</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-primary-hover-color</code></td>
+            <td>Hover color for buttons and interactive elements</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-text-color</code></td>
+            <td>Text color for headings and form elements</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-text-color-secondary</code></td>
+            <td>Text color for subtitle and secondary text</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-border-color</code></td>
+            <td>Border color for text areas</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-font-family</code></td>
+            <td>Font family for the form</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--form-background</code></td>
+            <td>Background color of the form</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Events</h2>
+        <hr />
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">doge-form-submit</code></td>
+            <td>Fired when the form is submitted. The event detail contains the responses and email body.</td>
+          </tr>
+        </table>
+      </section>
+    </div>
+  </body>
+</html> 
