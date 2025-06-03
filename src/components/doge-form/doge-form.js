@@ -6,21 +6,12 @@ export class DogeForm extends LitElement {
     height: { type: String },
     title: { type: String },
     subtitle: { type: String },
-    question1: { type: String },
-    question2: { type: String },
-    question3: { type: String },
-    question4: { type: String },
-    question5: { type: String },
-    question1Subtitle: { type: String },
-    question2Subtitle: { type: String },
-    question3Subtitle: { type: String },
-    question4Subtitle: { type: String },
-    question5Subtitle: { type: String },
-    question1Placeholder: { type: String },
-    question2Placeholder: { type: String },
-    question3Placeholder: { type: String },
-    question4Placeholder: { type: String },
-    question5Placeholder: { type: String },
+    questions: { 
+      type: Array,
+      hasChanged(newVal, oldVal) {
+        return true;
+      }
+    },
     emailTo: { type: String },
     emailSubject: { type: String }
   };
@@ -144,21 +135,7 @@ export class DogeForm extends LitElement {
     this.height = 'auto';
     this.title = '';
     this.subtitle = '';
-    this.question1 = '';
-    this.question2 = '';
-    this.question3 = '';
-    this.question4 = '';
-    this.question5 = '';
-    this.question1Subtitle = '';
-    this.question2Subtitle = '';
-    this.question3Subtitle = '';
-    this.question4Subtitle = '';
-    this.question5Subtitle = '';
-    this.question1Placeholder = '';
-    this.question2Placeholder = '';
-    this.question3Placeholder = '';
-    this.question4Placeholder = '';
-    this.question5Placeholder = '';
+    this.questions = [];
     this.emailTo = '';
     this.emailSubject = 'Form Submission';
   }
@@ -168,14 +145,11 @@ export class DogeForm extends LitElement {
     const formData = new FormData(e.target);
     const responses = [];
     
-    // Collect responses for each question that was provided
-    for (let i = 1; i <= 5; i++) {
-      const question = this[`question${i}`];
-      if (question) {
-        const response = formData.get(`question${i}`);
-        responses.push(`${question}\n${response}\n`);
-      }
-    }
+    // Collect responses for each question
+    this.questions.forEach((question, index) => {
+      const response = formData.get(`question${index}`);
+      responses.push(`${question.title}\n${response}\n`);
+    });
 
     // Create email body
     const emailBody = responses.join('\n');
@@ -207,45 +181,19 @@ export class DogeForm extends LitElement {
           </div>
         ` : ''}
 
-        ${this.question1 ? html`
-          <div class="question-group">
-            <h3 class="question-heading">${this.question1}</h3>
-            ${this.question1Subtitle ? html`<p class="question-subtitle">${this.question1Subtitle}</p>` : ''}
-            <textarea name="question1" required placeholder="${this.question1Placeholder}"></textarea>
-          </div>
-        ` : ''}
-
-        ${this.question2 ? html`
-          <div class="question-group">
-            <h3 class="question-heading">${this.question2}</h3>
-            ${this.question2Subtitle ? html`<p class="question-subtitle">${this.question2Subtitle}</p>` : ''}
-            <textarea name="question2" required placeholder="${this.question2Placeholder}"></textarea>
-          </div>
-        ` : ''}
-
-        ${this.question3 ? html`
-          <div class="question-group">
-            <h3 class="question-heading">${this.question3}</h3>
-            ${this.question3Subtitle ? html`<p class="question-subtitle">${this.question3Subtitle}</p>` : ''}
-            <textarea name="question3" required placeholder="${this.question3Placeholder}"></textarea>
-          </div>
-        ` : ''}
-
-        ${this.question4 ? html`
-          <div class="question-group">
-            <h3 class="question-heading">${this.question4}</h3>
-            ${this.question4Subtitle ? html`<p class="question-subtitle">${this.question4Subtitle}</p>` : ''}
-            <textarea name="question4" required placeholder="${this.question4Placeholder}"></textarea>
-          </div>
-        ` : ''}
-
-        ${this.question5 ? html`
-          <div class="question-group">
-            <h3 class="question-heading">${this.question5}</h3>
-            ${this.question5Subtitle ? html`<p class="question-subtitle">${this.question5Subtitle}</p>` : ''}
-            <textarea name="question5" required placeholder="${this.question5Placeholder}"></textarea>
-          </div>
-        ` : ''}
+        ${Array.isArray(this.questions) ? this.questions.map((question, index) => {
+          return html`
+            <div class="question-group">
+              <h3 class="question-heading">${question.title}</h3>
+              ${question.subtitle ? html`<p class="question-subtitle">${question.subtitle}</p>` : ''}
+              <textarea 
+                name="question${index}" 
+                required 
+                placeholder="${question.placeholder || ''}"
+              ></textarea>
+            </div>
+          `;
+        }) : ''}
 
         <button type="submit">
           <svg class="email-icon" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">

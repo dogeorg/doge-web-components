@@ -25,8 +25,10 @@
           it('renders questions when provided', async () => {
             const el = await fixture(html`
               <doge-form 
-                question1="What is your name?"
-                question2="What is your favorite color?"
+                .questions=${[
+                  { title: 'What is your name?' },
+                  { title: 'What is your favorite color?' }
+                ]}
               ></doge-form>
             `);
             
