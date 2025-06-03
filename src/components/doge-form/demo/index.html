@@ -31,34 +31,49 @@
         <hr />
 
         <div class="container">
-          <div class="box">
             <doge-form
               title="Feedback Form"
               subtitle="Help us improve our service"
               question1="What did you like about our service?"
+              question1Subtitle="Share your positive experiences and what made your interaction special"
+              question1Placeholder="Tell us what you enjoyed most..."
               question2="What could we improve?"
+              question2Subtitle="Your honest feedback helps us grow and serve you better"
+              question2Placeholder="Share your suggestions for improvement..."
               question3="Would you recommend us to others? Why or why not?"
+              question3Subtitle="Your recommendation means a lot to us and helps others discover our service"
+              question3Placeholder="Let us know your thoughts..."
               emailTo="feedback@example.com"
               emailSubject="Customer Feedback"
               width="100%"
             ></doge-form>
-            <span>Basic Feedback Form</span>
-          </div>
 
-          <div class="box">
             <doge-form
               title="Contact Us"
               subtitle="We'd love to hear from you"
               question1="What's your name?"
+              question1Placeholder="Enter your full name..."
               question2="What's your email address?"
+              question2Placeholder="Enter your email address..."
               question3="What's your message?"
+              question3Placeholder="Type your message here..."
               emailTo="contact@example.com"
               emailSubject="New Contact Form Submission"
               width="100%"
-              style="--doge-primary-color: #ff9800; --doge-primary-hover-color: #f57c00; --doge-text-color: #ffffff; --doge-text-color-secondary: #cccccc; --doge-border-color: #444444; --form-background: #1a1a1a;"
+              style="--doge-primary-color: #E3A849;
+              --doge-primary-hover-color: #E3A849;
+              --doge-text-color: #ffffff;
+              --doge-text-color-secondary: #cccccc; 
+              --doge-textarea-border-color: #333230;
+              --doge-textarea-background: #151413;
+              --doge-textentry-text-color: #ffffff;
+              --doge-textentry-placeholder-text-color: #878685;
+              --doge-button-text-color: #201F1D;
+              --form-background: #201F1D;
+              --doge-textentry-placeholder-text-color: #878685;
+              --form-width: 800px;
+              --form-radius: 0px;"
             ></doge-form>
-            <span>Custom Themed Contact Form</span>
-          </div>
         </div>
       </section>
 
@@ -84,10 +99,20 @@
             title="My Form"
             subtitle="Optional subtitle"
             question1="First question?"
+            question1Subtitle="Optional subtitle for first question"
+            question1Placeholder="Optional placeholder text"
             question2="Second question?"
+            question2Subtitle="Optional subtitle for second question"
+            question2Placeholder="Optional placeholder text"
             question3="Third question?"
+            question3Subtitle="Optional subtitle for third question"
+            question3Placeholder="Optional placeholder text"
             question4="Fourth question?"
+            question4Subtitle="Optional subtitle for fourth question"
+            question4Placeholder="Optional placeholder text"
             question5="Fifth question?"
+            question5Subtitle="Optional subtitle for fifth question"
+            question5Placeholder="Optional placeholder text"
             emailTo="recipient@example.com"
             emailSubject="Form Submission"
             width="600px"
@@ -125,6 +150,14 @@
           <tr>
             <td><code class="nowrap">question1</code> to <code class="nowrap">question5</code></td>
             <td>Up to 5 optional questions to display in the form</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">question1Subtitle</code> to <code class="nowrap">question5Subtitle</code></td>
+            <td>Optional subtitle text displayed below each question</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">question1Placeholder</code> to <code class="nowrap">question5Placeholder</code></td>
+            <td>Optional placeholder text for each question's text area</td>
           </tr>
           <tr>
             <td><code class="nowrap">emailTo</code></td>
@@ -170,16 +203,40 @@
             <td>Text color for subtitle and secondary text</td>
           </tr>
           <tr>
-            <td><code class="nowrap">--doge-border-color</code></td>
+            <td><code class="nowrap">--doge-textarea-border-color</code></td>
             <td>Border color for text areas</td>
           </tr>
           <tr>
-            <td><code class="nowrap">--doge-font-family</code></td>
-            <td>Font family for the form</td>
+            <td><code class="nowrap">--doge-textarea-background</code></td>
+            <td>Background color for text areas</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-button-text-color</code></td>
+            <td>Text color for buttons</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-textentry-text-color</code></td>
+            <td>Text color for text entry fields</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-textentry-placeholder-text-color</code></td>
+            <td>Text color for placeholder text in text entry fields</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--form-width</code></td>
+            <td>Width of the form container (defaults to "100%")</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--form-height</code></td>
+            <td>Height of the form container (defaults to "auto")</td>
           </tr>
           <tr>
             <td><code class="nowrap">--form-background</code></td>
             <td>Background color of the form</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--form-radius</code></td>
+            <td>Border radius of the form container</td>
           </tr>
         </table>
       </section>

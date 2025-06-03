@@ -2,6 +2,15 @@ doge-form {
   --doge-primary-color: #4CAF50;
   --doge-primary-hover-color: #45a049;
   --doge-text-color: #333;
-  --doge-border-color: #ccc;
+  --doge-text-color-secondary: #666;
+  --doge-textarea-border-color: #ccc;
+  --doge-textarea-background: #f9f9f9;
+  --doge-textentry-text-color: #333;
+  --doge-textentry-placeholder-text-color: #999;
   --doge-font-family: system-ui, -apple-system, sans-serif;
+  --doge-button-text-color: white;
+  --form-width: 100%;
+  --form-height: auto;
+  --form-background: white;
+  --form-radius: 32px;
 } 
