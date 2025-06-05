@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../../resources/img/favicon.ico" type="image/x-icon">
+    <title>Doge Web Components | doge-form-email</title>
+
+    <link rel="stylesheet" href="../../../index.css" />
+    <link rel="stylesheet" href="demo.css" />
+    <link rel="stylesheet" href="../../../../resources/css/doge-components.css" />
+    <link rel="stylesheet" href="../initial.css" />
+    <script type="module" src="../doge-form-email.js"></script>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <a href="/">← Back</a>
+        <h1><span class="sans">&lt;doge-form-email&gt; </span><span class="soft comic">web component</span></h1>
+      </header>
+
+      <section>
+        <h2>Purpose</h2>
+        <hr />
+        <p>
+          An email-specific implementation of the doge-form component that sends form submissions via email.
+        </p>
+      </section>
+
+      <section>
+        <h2>Examples</h2>
+        <hr />
+
+        <div class="container">
+          <doge-form-email
+            title="Contact Us"
+            subtitle="We'd love to hear from you!"
+            email-to="contact@example.com"
+            email-subject="New Contact Form Submission"
+            width="100%"
+            questions='[
+              {
+                "title": "What is your name?",
+                "subtitle": "Please enter your full name",
+                "placeholder": "John Doe"
+              },
+              {
+                "title": "What is your message?",
+                "subtitle": "Tell us what is on your mind",
+                "placeholder": "Your message here..."
+              }
+            ]'
+          ></doge-form-email>
+
+          <doge-form-email
+            title="Dark Theme Contact"
+            subtitle="Send us a message"
+            email-to="contact@example.com"
+            email-subject="Dark Theme Contact Form"
+            width="100%"
+            questions='[
+              {
+                "title": "Your name",
+                "placeholder": "Enter your name..."
+              },
+              {
+                "title": "Your message",
+                "placeholder": "Type your message here..."
+              }
+            ]'
+            style="--doge-primary-color: #E3A849;
+            --doge-primary-hover-color: #E3A849;
+            --doge-text-color: #ffffff;
+            --doge-text-color-secondary: #cccccc; 
+            --doge-textarea-border-color: #333230;
+            --doge-textarea-background: #151413;
+            --doge-textentry-text-color: #ffffff;
+            --doge-textentry-placeholder-text-color: #878685;
+            --doge-button-text-color: #201F1D;
+            --form-background: #201F1D;
+            --doge-textentry-placeholder-text-color: #878685;
+            --form-width: 800px;
+            --form-radius: 0px;"
+          ></doge-form-email>
+        </div>
+      </section>
+
+      <section>
+        <h2>Usage</h2>
+        <hr />
+        <p>
+          1. Add the script to your webpage.
+        </p>
+
+        <pre><code class="language-markup">
+          &lt;script
+            type="module"
+            src="https://fetch.dogecoin.org/doge-form-email.js"&gt;
+          &lt;/script&gt;
+          </code></pre>
+
+        <p>
+          2. Place a doge-form-email element on your page with your desired configuration.
+        </p>
+        <pre><code class="language-html">
+          &lt;doge-form-email
+            title="Contact Us"
+            subtitle="We'd love to hear from you!"
+            email-to="contact@example.com"
+            email-subject="New Contact Form Submission"
+            width="600px"
+            questions='[
+              {
+                "title": "What\'s your name?",
+                "subtitle": "Please enter your full name",
+                "placeholder": "John Doe"
+              },
+              {
+                "title": "What\'s your message?",
+                "subtitle": "Tell us what\'s on your mind",
+                "placeholder": "Your message here..."
+              }
+            ]'
+          &gt;&lt;/doge-form-email&gt;
+          </code></pre>
+
+        <p>
+          3. Handle form submissions using the 'doge-form-submit' event (optional).
+        </p>
+        <pre><code class="language-javascript">
+          const form = document.querySelector('doge-form-email');
+          form.addEventListener('doge-form-submit', (e) => {
+            console.log('Form responses:', e.detail.responses);
+            console.log('Email body:', e.detail.emailBody);
+          });
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>Properties</h2>
+        <hr />
+        <p>This component extends <code>doge-form</code> and adds the following properties:</p>
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">email-to</code></td>
+            <td>Email address where the form responses will be sent</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">email-subject</code></td>
+            <td>Subject line for the email (defaults to "Form Submission")</td>
+          </tr>
+        </table>
+
+        <p>For all other properties and styling options, please refer to the <a href="../doge-form/demo/index.html">base doge-form component documentation</a>.</p>
+      </section>
+
+      <section>
+        <h2>Events</h2>
+        <hr />
+        <table class="props-list">
+          <tr>
+            <th>Event</th>
+            <th>Detail</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">doge-form-submit</code></td>
+            <td>
+              <code>
+{
+  responses: string[],
+  emailBody: string
+}
+              </code>
+            </td>
+            <td>Dispatched when the form is submitted, containing the formatted responses and email body</td>
+          </tr>
+        </table>
+      </section>
+    </div>
+
+    <script>
+      // Initialize the demo form
+      const form = document.querySelector('doge-form-email');
+      form.addEventListener('doge-form-submit', (e) => {
+        console.log('Form submitted:', e.detail);
+      });
+    </script>
+  </body>
+</html> 

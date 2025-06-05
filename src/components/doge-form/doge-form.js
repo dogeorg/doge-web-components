@@ -12,8 +12,7 @@ export class DogeForm extends LitElement {
         return true;
       }
     },
-    emailTo: { type: String },
-    emailSubject: { type: String }
+    submitButtonText: { type: String }
   };
 
   static styles = css`
@@ -113,19 +112,14 @@ export class DogeForm extends LitElement {
       transition: background-color 0.2s;
       align-self: center;
       font-family: 'Comic Neue', cursive;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      white-space: nowrap;
     }
 
     button:hover {
       background-color: var(--doge-primary-hover-color, #45a049);
-    }
-
-    .email-icon {
-      width: 1.2em;
-      height: 1.2em;
-      fill: currentColor;
     }
   `;
 
@@ -136,33 +130,23 @@ export class DogeForm extends LitElement {
     this.title = '';
     this.subtitle = '';
     this.questions = [];
-    this.emailTo = '';
-    this.emailSubject = 'Form Submission';
+    this.submitButtonText = 'Submit';
   }
 
   handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const responses = [];
+    const responses = {};
     
     // Collect responses for each question
     this.questions.forEach((question, index) => {
       const response = formData.get(`question${index}`);
-      responses.push(`${question.title}\n${response}\n`);
+      responses[question.title] = response;
     });
-
-    // Create email body
-    const emailBody = responses.join('\n');
-    
-    // Create mailto link
-    const mailtoLink = `mailto:${this.emailTo}?subject=${encodeURIComponent(this.emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-    
-    // Open email client
-    window.location.href = mailtoLink;
     
     // Dispatch event for any listeners
     this.dispatchEvent(new CustomEvent('doge-form-submit', {
-      detail: { responses, emailBody },
+      detail: { responses },
       bubbles: true,
       composed: true
     }));
@@ -196,10 +180,7 @@ export class DogeForm extends LitElement {
         }) : ''}
 
         <button type="submit">
-          <svg class="email-icon" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.1665 10.2779C3.1665 7.86946 5.06131 5.8335 7.49984 5.8335H25.4998C27.9384 5.8335 29.8332 7.86946 29.8332 10.2779V22.7224C29.8332 25.1309 27.9384 27.1668 25.4998 27.1668H7.49984C5.06131 27.1668 3.1665 25.1309 3.1665 22.7224V10.2779ZM7.64319 8.50016L16.4236 14.8041C16.4514 14.824 16.4774 14.8304 16.4998 14.8304C16.5223 14.8304 16.5483 14.824 16.576 14.8041L25.3565 8.50016H7.64319ZM27.1665 10.4686C27.1234 10.5094 27.077 10.5477 27.0274 10.5833L18.1313 16.9703C17.1529 17.6727 15.8468 17.6727 14.8684 16.9703L5.97223 10.5833C5.92269 10.5477 5.87632 10.5094 5.83317 10.4686V22.7224C5.83317 23.7503 6.62465 24.5002 7.49984 24.5002H25.4998C26.375 24.5002 27.1665 23.7503 27.1665 22.7224V10.4686Z" fill="currentColor"/>
-          </svg>
-          Submit via email
+          ${this.submitButtonText}
         </button>
       </form>
     `;
