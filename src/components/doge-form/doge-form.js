@@ -179,9 +179,11 @@ export class DogeForm extends LitElement {
           `;
         }) : ''}
 
-        <button type="submit">
-          ${this.submitButtonText}
-        </button>
+        <slot name="submit-button">
+          <button type="submit">
+            ${this.submitButtonText}
+          </button>
+        </slot>
       </form>
     `;
   }

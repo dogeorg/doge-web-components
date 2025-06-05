@@ -85,6 +85,7 @@
               --doge-textentry-placeholder-text-color: #878685;
               --form-width: 800px;
               --form-radius: 0px;"
+              submitButtonText="Ship it!"
             ></doge-form>
         </div>
       </section>
@@ -111,6 +112,7 @@
             title="My Form"
             subtitle="Optional subtitle"
             width="600px"
+            submitButtonText="Custom Submit Text"
             questions='[
               {
                 "title": "First question?",
@@ -176,6 +178,22 @@
           <tr>
             <td><code class="nowrap">height</code></td>
             <td>Height of the form (defaults to "auto")</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">submitButtonText</code></td>
+            <td>Text to display on the submit button (defaults to "Submit")</td>
+          </tr>
+        </table>
+
+        <h3>Slots</h3>
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">submit-button</code></td>
+            <td>Custom submit button slot. When using this slot, make sure to add <code>type="submit"</code> and <code>onclick="this.closest('doge-form').shadowRoot.querySelector('form').requestSubmit()"</code> to your button for proper form submission handling.</td>
           </tr>
         </table>
       </section>

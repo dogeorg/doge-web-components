@@ -31,56 +31,76 @@
         <hr />
 
         <div class="container">
-          <doge-form-email
-            title="Contact Us"
-            subtitle="We'd love to hear from you!"
-            email-to="contact@example.com"
-            email-subject="New Contact Form Submission"
-            width="100%"
-            questions='[
-              {
-                "title": "What is your name?",
-                "subtitle": "Please enter your full name",
-                "placeholder": "John Doe"
-              },
-              {
-                "title": "What is your message?",
-                "subtitle": "Tell us what is on your mind",
-                "placeholder": "Your message here..."
-              }
-            ]'
-          ></doge-form-email>
+            <doge-form-email
+                title="Contact Us"
+                subtitle="We'd love to hear from you!"
+                email-to="contact@example.com"
+                email-subject="New Contact Form Submission"
+                width="100%"
+                questions='[
+                {
+                    "title": "What is your name?",
+                    "subtitle": "Please enter your full name",
+                    "placeholder": "John Doe"
+                },
+                {
+                    "title": "What is your message?",
+                    "subtitle": "Tell us what is on your mind",
+                    "placeholder": "Your message here..."
+                }
+                ]'
+            >
+            </doge-form-email>
 
-          <doge-form-email
-            title="Dark Theme Contact"
-            subtitle="Send us a message"
-            email-to="contact@example.com"
-            email-subject="Dark Theme Contact Form"
-            width="100%"
-            questions='[
-              {
-                "title": "Your name",
-                "placeholder": "Enter your name..."
-              },
-              {
-                "title": "Your message",
-                "placeholder": "Type your message here..."
-              }
-            ]'
-            style="--doge-primary-color: #E3A849;
-            --doge-primary-hover-color: #E3A849;
-            --doge-text-color: #ffffff;
-            --doge-text-color-secondary: #cccccc; 
-            --doge-textarea-border-color: #333230;
-            --doge-textarea-background: #151413;
-            --doge-textentry-text-color: #ffffff;
-            --doge-textentry-placeholder-text-color: #878685;
-            --doge-button-text-color: #201F1D;
-            --form-background: #201F1D;
-            --doge-textentry-placeholder-text-color: #878685;
-            --form-width: 800px;
-            --form-radius: 0px;"
-          ></doge-form-email>
+            <doge-form-email
+                title="Dark Theme Contact"
+                subtitle="Send us a message"
+                email-to="contact@example.com"
+                email-subject="Dark Theme Contact Form"
+                width="100%"
+                questions='[
+                {
+                    "title": "Your name",
+                    "placeholder": "Enter your name..."
+                },
+                {
+                    "title": "Your message",
+                    "placeholder": "Type your message here..."
+                }
+                ]'
+                style="--doge-primary-color: #E3A849;
+                --doge-primary-hover-color: #E3A849;
+                --doge-text-color: #ffffff;
+                --doge-text-color-secondary: #cccccc; 
+                --doge-textarea-border-color: #333230;
+                --doge-textarea-background: #151413;
+                --doge-textentry-text-color: #ffffff;
+                --doge-textentry-placeholder-text-color: #878685;
+                --doge-button-text-color: #201F1D;
+                --form-background: #201F1D;
+                --doge-textentry-placeholder-text-color: #878685;
+                --form-width: 800px;
+                --form-radius: 0px;"
+            >
+                <button slot="submit-button" 
+                type="submit"
+                onclick="this.closest('doge-form-email').shadowRoot.querySelector('form').requestSubmit()"
+                style="background-color: #E3A849;
+                border-radius: 999px;
+                font-family: 'Comic Neue', cursive; border: none;
+                font-size: 1rem;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 0.75rem 1.5rem;
+                align-self: center;">
+                    <svg viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.1665 10.2779C3.1665 7.86946 5.06131 5.8335 7.49984 5.8335H25.4998C27.9384 5.8335 29.8332 7.86946 29.8332 10.2779V22.7224C29.8332 25.1309 27.9384 27.1668 25.4998 27.1668H7.49984C5.06131 27.1668 3.1665 25.1309 3.1665 22.7224V10.2779ZM7.64319 8.50016L16.4236 14.8041C16.4514 14.824 16.4774 14.8304 16.4998 14.8304C16.5223 14.8304 16.5483 14.824 16.576 14.8041L25.3565 8.50016H7.64319ZM27.1665 10.4686C27.1234 10.5094 27.077 10.5477 27.0274 10.5833L18.1313 16.9703C17.1529 17.6727 15.8468 17.6727 14.8684 16.9703L5.97223 10.5833C5.92269 10.5477 5.87632 10.5094 5.83317 10.4686V22.7224C5.83317 23.7503 6.62465 24.5002 7.49984 24.5002H25.4998C26.375 24.5002 27.1665 23.7503 27.1665 22.7224V10.4686Z" fill="currentColor"/>
+                    </svg>
+                    Submit via email
+                </button>
+            </doge-form-email>
         </div>
       </section>
 
@@ -108,6 +128,7 @@
             email-to="contact@example.com"
             email-subject="New Contact Form Submission"
             width="600px"
+            submitButtonText="Send Message"
             questions='[
               {
                 "title": "What\'s your name?",
@@ -152,9 +173,25 @@
             <td><code class="nowrap">email-subject</code></td>
             <td>Subject line for the email (defaults to "Form Submission")</td>
           </tr>
+          <tr>
+            <td><code class="nowrap">submitButtonText</code></td>
+            <td>Text to display on the submit button (defaults to "Submit via email")</td>
+          </tr>
         </table>
 
         <p>For all other properties and styling options, please refer to the <a href="../doge-form/demo/index.html">base doge-form component documentation</a>.</p>
+
+        <h3>Slots</h3>
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">submit-button</code></td>
+            <td>Custom submit button slot. When using this slot, make sure to add <code>type="submit"</code> and <code>onclick="this.closest('doge-form-email').shadowRoot.querySelector('form').requestSubmit()"</code> to your button for proper form submission handling.</td>
+          </tr>
+        </table>
       </section>
 
       <section>
