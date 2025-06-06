@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doge Form Email Test</title>
+  <script type="module" src="./doge-form-email.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    #eventLog {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #f5f5f5;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <h1>Doge Form Email Test</h1>
+  
+  <doge-form-email
+    id="emailForm"
+    email-to="test@example.com"
+    email-subject="Test Form Submission">
+  </doge-form-email>
+
+  <div id="eventLog">
+    <h3>Event Log:</h3>
+    <pre id="log"></pre>
+  </div>
+
+  <script>
+    const form = document.getElementById('emailForm');
+    const log = document.getElementById('log');
+
+    // Add some sample questions
+    form.questions = [
+      { title: 'What is your name?', type: 'text' },
+      { title: 'What is your favorite color?', type: 'text' },
+      { title: 'How satisfied are you?', type: 'select', options: ['Very', 'Somewhat', 'Not at all'] }
+    ];
+
+    // Log form submission events
+    form.addEventListener('doge-form-submit', (e) => {
+      log.textContent += `\nForm submitted with responses:\n${JSON.stringify(e.detail.responses, null, 2)}`;
+    });
+
+    // Log email-specific events
+    form.addEventListener('doge-form-email-submit', (e) => {
+      log.textContent += `\nEmail form submitted:\n${JSON.stringify({
+        emailBody: e.detail.emailBody,
+        mailtoLink: e.detail.mailtoLink
+      }, null, 2)}`;
+    });
+  </script>
+
+  <script type="module">
+    import { html, fixture, expect } from "@open-wc/testing";
+    import { runTests } from "@web/test-runner-mocha";
+    import "./doge-form-email.js";
+
+    runTests(async () => {
+      describe("DogeFormEmail", () => {
+        it('renders with email-specific properties', async () => {
+          const el = await fixture(html`
+            <doge-form-email 
+              email-to="test@example.com"
+              email-subject="Test Email"
+            ></doge-form-email>
+          `);
+          
+          expect(el.emailTo).to.equal('test@example.com');
+          expect(el.emailSubject).to.equal('Test Email');
+          expect(el.submitButtonText).to.equal('Submit via email');
+        });
+
+        it('inherits form functionality from DogeForm', async () => {
+          const el = await fixture(html`
+            <doge-form-email 
+              title="Test Form"
+              subtitle="Please fill out this form"
+              .questions=${[
+                { title: 'What is your name?' }
+              ]}
+            ></doge-form-email>
+          `);
+          
+          const title = el.shadowRoot.querySelector('.form-title');
+          const subtitle = el.shadowRoot.querySelector('.form-subtitle');
+          const question = el.shadowRoot.querySelector('.question-heading');
+          
+          expect(title.textContent.trim()).to.equal('Test Form');
+          expect(subtitle.textContent.trim()).to.equal('Please fill out this form');
+          expect(question.textContent.trim()).to.equal('What is your name?');
+        });
+      });
+    });
+  </script>
+</body>
+</html> 

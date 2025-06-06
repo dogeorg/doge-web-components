@@ -1,0 +1,44 @@
+<html>
+  <body>
+    <script type="module">
+      import { html, fixture, expect } from "@open-wc/testing";
+      import { runTests } from "@web/test-runner-mocha";
+      import "./doge-form.js";
+
+      runTests(async () => {
+        describe("DogeForm", () => {
+          it('renders with title and subtitle', async () => {
+            const el = await fixture(html`
+              <doge-form 
+                title="Test Form"
+                subtitle="Please fill out this form"
+              ></doge-form>
+            `);
+            
+            const title = el.shadowRoot.querySelector('.form-title');
+            const subtitle = el.shadowRoot.querySelector('.form-subtitle');
+            
+            expect(title.textContent.trim()).to.equal('Test Form');
+            expect(subtitle.textContent.trim()).to.equal('Please fill out this form');
+          });
+
+          it('renders questions when provided', async () => {
+            const el = await fixture(html`
+              <doge-form 
+                .questions=${[
+                  { title: 'What is your name?' },
+                  { title: 'What is your favorite color?' }
+                ]}
+              ></doge-form>
+            `);
+            
+            const questions = el.shadowRoot.querySelectorAll('.question-heading');
+            expect(questions.length).to.equal(2);
+            expect(questions[0].textContent.trim()).to.equal('What is your name?');
+            expect(questions[1].textContent.trim()).to.equal('What is your favorite color?');
+          });
+        });
+      });
+    </script>
+  </body>
+</html> 

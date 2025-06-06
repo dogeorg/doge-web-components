@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../../resources/img/favicon.ico" type="image/x-icon">
+    <title>Doge Web Components | doge-form</title>
+
+    <link rel="stylesheet" href="../../../index.css" />
+    <link rel="stylesheet" href="demo.css" />
+    <link rel="stylesheet" href="../../../../resources/css/doge-components.css" />
+    <link rel="stylesheet" href="../initial.css" />
+    <script type="module" src="../doge-form.js"></script>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <a href="/">← Back</a>
+        <h1><span class="sans">&lt;doge-form&gt; </span><span class="soft comic">web component</span></h1>
+      </header>
+
+      <section>
+        <h2>Purpose</h2>
+        <hr />
+        <p>
+          A flexible form component that collects responses to questions and sends them via email. Perfect for feedback forms, surveys, and contact forms.
+        </p>
+      </section>
+
+      <section>
+        <h2>Examples</h2>
+        <hr />
+
+        <div class="container">
+            <doge-form
+              title="Feedback Form"
+              subtitle="Help us improve our service"
+              width="100%"
+              questions='[
+                {
+                  "title": "What did you like about our service?",
+                  "subtitle": "Share your positive experiences and what made your interaction special",
+                  "placeholder": "Tell us what you enjoyed most..."
+                },
+                {
+                  "title": "What could we improve?",
+                  "subtitle": "Your honest feedback helps us grow and serve you better",
+                  "placeholder": "Share your suggestions for improvement..."
+                },
+                {
+                  "title": "Would you recommend us to others? Why or why not?",
+                  "subtitle": "Your recommendation means a lot to us and helps others discover our service",
+                  "placeholder": "Let us know your thoughts..."
+                }
+              ]'
+            ></doge-form>
+
+            <doge-form
+              title="Contact Us"
+              subtitle="We'd love to hear from you"
+              width="100%"
+              questions='[
+                {
+                  "title": "What is your name?",
+                  "placeholder": "Enter your full name..."
+                },
+                {
+                  "title": "What is your email address?",
+                  "placeholder": "Enter your email address..."
+                },
+                {
+                  "title": "What is your message?",
+                  "placeholder": "Type your message here..."
+                }
+              ]'
+              style="--doge-primary-color: #E3A849;
+              --doge-primary-hover-color: #E3A849;
+              --doge-text-color: #ffffff;
+              --doge-text-color-secondary: #cccccc; 
+              --doge-textarea-border-color: #333230;
+              --doge-textarea-background: #151413;
+              --doge-textentry-text-color: #ffffff;
+              --doge-textentry-placeholder-text-color: #878685;
+              --doge-button-text-color: #201F1D;
+              --form-background: #201F1D;
+              --doge-textentry-placeholder-text-color: #878685;
+              --form-width: 800px;
+              --form-radius: 0px;"
+              submitButtonText="Ship it!"
+            ></doge-form>
+        </div>
+      </section>
+
+      <section>
+        <h2>Usage</h2>
+        <hr />
+        <p>
+          1. Add the script to your webpage.
+        </p>
+
+        <pre><code class="language-markup">
+          &lt;script
+            type="module"
+            src="https://fetch.dogecoin.org/doge-form.js"&gt;
+          &lt;/script&gt;
+          </code></pre>
+
+        <p>
+          2. Place a doge-form element on your page with your desired configuration.
+        </p>
+        <pre><code class="language-html">
+          &lt;doge-form
+            title="My Form"
+            subtitle="Optional subtitle"
+            width="600px"
+            submitButtonText="Custom Submit Text"
+            questions='[
+              {
+                "title": "First question?",
+                "subtitle": "Optional subtitle",
+                "placeholder": "Optional placeholder text"
+              },
+              {
+                "title": "Second question?",
+                "subtitle": "Optional subtitle",
+                "placeholder": "Optional placeholder text"
+              },
+              {
+                "title": "Third question?",
+                "subtitle": "Optional subtitle",
+                "placeholder": "Optional placeholder text"
+              }
+            ]'
+          &gt;&lt;/doge-form&gt;
+          </code></pre>
+
+        <p>
+          3. Handle form submissions using the 'doge-form-submit' event (optional).
+        </p>
+        <pre><code class="language-javascript">
+          const form = document.querySelector('doge-form');
+          form.addEventListener('doge-form-submit', (e) => {
+            console.log('Form responses:', e.detail.responses);
+            console.log('Email body:', e.detail.emailBody);
+          });
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>Properties</h2>
+        <hr />
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">title</code></td>
+            <td>Form title displayed at the top</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">subtitle</code></td>
+            <td>Optional subtitle displayed below the title</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">questions</code></td>
+            <td>Array of question objects, each containing:
+              <ul>
+                <li><code>title</code>: The question text (required)</li>
+                <li><code>subtitle</code>: Optional subtitle text displayed below the question</li>
+                <li><code>placeholder</code>: Optional placeholder text for the question's text area</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">width</code></td>
+            <td>Width of the form (defaults to "100%")</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">height</code></td>
+            <td>Height of the form (defaults to "auto")</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">submitButtonText</code></td>
+            <td>Text to display on the submit button (defaults to "Submit")</td>
+          </tr>
+        </table>
+
+        <h3>Slots</h3>
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">submit-button</code></td>
+            <td>Custom submit button slot. When using this slot, make sure to add <code>type="submit"</code> and <code>onclick="this.closest('doge-form').shadowRoot.querySelector('form').requestSubmit()"</code> to your button for proper form submission handling.</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Styling</h2>
+        <hr />
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-primary-color</code></td>
+            <td>Primary color for buttons and interactive elements</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-primary-hover-color</code></td>
+            <td>Hover color for buttons and interactive elements</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-text-color</code></td>
+            <td>Text color for headings and form elements</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-text-color-secondary</code></td>
+            <td>Text color for subtitle and secondary text</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-textarea-border-color</code></td>
+            <td>Border color for text areas</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-textarea-background</code></td>
+            <td>Background color for text areas</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-button-text-color</code></td>
+            <td>Text color for buttons</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-textentry-text-color</code></td>
+            <td>Text color for text entry fields</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--doge-textentry-placeholder-text-color</code></td>
+            <td>Text color for placeholder text in text entry fields</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--form-width</code></td>
+            <td>Width of the form container (defaults to "100%")</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--form-height</code></td>
+            <td>Height of the form container (defaults to "auto")</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--form-background</code></td>
+            <td>Background color of the form</td>
+          </tr>
+          <tr>
+            <td><code class="nowrap">--form-radius</code></td>
+            <td>Border radius of the form container</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Events</h2>
+        <hr />
+        <table class="props-list">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code class="nowrap">doge-form-submit</code></td>
+            <td>Fired when the form is submitted. The event detail contains the responses and email body.</td>
+          </tr>
+        </table>
+      </section>
+    </div>
+  </body>
+</html> 
