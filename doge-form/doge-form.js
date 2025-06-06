@@ -1,4 +1,6 @@
-import { LitElement, html, css } from 'lit';
+import {
+  LitElement, css, html
+} from "../../lib/doge-init.js"
 
 export class DogeForm extends LitElement {
   static properties = {
