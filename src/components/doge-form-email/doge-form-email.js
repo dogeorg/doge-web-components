@@ -1,4 +1,6 @@
-import { html } from 'lit';
+import { 
+  html
+} from "../../lib/doge-init.js"
 import { DogeForm } from '../doge-form/doge-form.js';
 
 export class DogeFormEmail extends DogeForm {
